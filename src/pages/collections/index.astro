@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CollectionCard from '../../components/CollectionCard.astro';
+import { getCollection } from 'astro:content';
+
+const allCollections = await getCollection('collections');
+const sorted = allCollections.sort((a, b) => a.data.order - b.data.order || b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout
+  title="Collections | Francesco Giacomi"
+  description="Photography collections by Francesco Giacomi — landscapes and stories from travels around the world."
+>
+  <section class="collections-page">
+    <div class="container">
+      <header class="collections-page__header">
+        <h1>Collections</h1>
+      </header>
+      <div class="collections-grid">
+        {sorted.map((entry) => (
+          <CollectionCard
+            title={entry.data.title}
+            slug={entry.data.slug}
+            location={entry.data.location}
+            year={entry.data.year}
+            cover={entry.data.cover}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .collections-page {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .collections-page__header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .collections-page__header h1 {
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .collections-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 640px) {
+    .collections-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .collections-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,77 @@
+---
+interface CollectionLink {
+  slug: string;
+  title: string;
+}
+
+interface Props {
+  prev?: CollectionLink;
+  next?: CollectionLink;
+}
+
+const { prev, next } = Astro.props;
+---
+
+{(prev || next) && (
+  <nav class="collection-nav">
+    <div class="collection-nav__inner">
+      {prev ? (
+        <a href={`/collections/${prev.slug}`} class="collection-nav__link collection-nav__link--prev">
+          <span class="collection-nav__label">&larr; Previous</span>
+          <span class="collection-nav__title">{prev.title}</span>
+        </a>
+      ) : <div />}
+      {next ? (
+        <a href={`/collections/${next.slug}`} class="collection-nav__link collection-nav__link--next">
+          <span class="collection-nav__label">Next &rarr;</span>
+          <span class="collection-nav__title">{next.title}</span>
+        </a>
+      ) : <div />}
+    </div>
+  </nav>
+)}
+
+<style>
+  .collection-nav {
+    margin-top: var(--spacing-2xl);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .collection-nav__inner {
+    display: flex;
+    justify-content: space-between;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    gap: var(--spacing-lg);
+  }
+
+  .collection-nav__link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    transition: opacity var(--transition);
+  }
+
+  .collection-nav__link:hover {
+    opacity: 0.6;
+  }
+
+  .collection-nav__link--next {
+    text-align: right;
+    margin-left: auto;
+  }
+
+  .collection-nav__label {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .collection-nav__title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+</style>

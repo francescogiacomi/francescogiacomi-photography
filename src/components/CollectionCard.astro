@@ -1,0 +1,85 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  slug: string;
+  location: string;
+  year: number;
+  cover: ImageMetadata;
+}
+
+const { title, slug, location, year, cover } = Astro.props;
+---
+
+<a href={`/collections/${slug}`} class="card">
+  <div class="card__image">
+    <Image
+      src={cover}
+      alt={title}
+      widths={[400, 600, 800]}
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      loading="lazy"
+    />
+  </div>
+  <div class="card__overlay">
+    <h2 class="card__title">{title}</h2>
+    <span class="card__meta">{location} &middot; {year}</span>
+  </div>
+</a>
+
+<style>
+  .card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+    background: #f0f0f0;
+  }
+
+  .card__image {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+  }
+
+  .card__image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card:hover .card__image {
+    transform: scale(1.03);
+  }
+
+  .card__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 1;
+    transition: background var(--transition);
+  }
+
+  .card:hover .card__overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .card__title {
+    color: #fff;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .card__meta {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.875rem;
+    margin-top: var(--spacing-xs);
+    letter-spacing: 0.03em;
+  }
+</style>

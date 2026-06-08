@@ -1,0 +1,148 @@
+---
+import { Image } from 'astro:assets';
+
+interface Photo {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  layout: 'full' | 'half';
+}
+
+interface Props {
+  photos: Photo[];
+}
+
+const { photos } = Astro.props;
+
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/images/collections/**/*.{jpg,jpeg,png,webp}',
+  { eager: true }
+);
+
+function resolveImage(src: string): ImageMetadata {
+  const key = Object.keys(allImages).find((k) => k.includes(src));
+  if (!key) throw new Error(`Image not found: ${src}`);
+  return allImages[key].default;
+}
+
+type Row = { type: 'full'; photo: Photo } | { type: 'pair'; photos: [Photo, Photo] };
+const rows: Row[] = [];
+let i = 0;
+while (i < photos.length) {
+  const photo = photos[i];
+  if (photo.layout === 'half' && i + 1 < photos.length && photos[i + 1].layout === 'half') {
+    rows.push({ type: 'pair', photos: [photo, photos[i + 1]] });
+    i += 2;
+  } else {
+    rows.push({ type: 'full', photo });
+    i++;
+  }
+}
+---
+
+<div class="photo-grid" id="gallery">
+  {rows.map((row) => {
+    if (row.type === 'full') {
+      const resolved = resolveImage(row.photo.src);
+      return (
+        <figure class="photo-grid__full">
+          <a
+            href={resolved.src}
+            data-pswp-width={row.photo.width}
+            data-pswp-height={row.photo.height}
+            target="_blank"
+          >
+            <Image
+              src={resolved}
+              alt={row.photo.alt}
+              widths={[800, 1200, 1800]}
+              sizes="(max-width: 1200px) 100vw, 1200px"
+              loading="lazy"
+            />
+          </a>
+          {row.photo.alt && <figcaption>{row.photo.alt}</figcaption>}
+        </figure>
+      );
+    }
+    return (
+      <div class="photo-grid__pair">
+        {row.photos.map((photo) => {
+          const resolved = resolveImage(photo.src);
+          return (
+            <figure class="photo-grid__half">
+              <a
+                href={resolved.src}
+                data-pswp-width={photo.width}
+                data-pswp-height={photo.height}
+                target="_blank"
+              >
+                <Image
+                  src={resolved}
+                  alt={photo.alt}
+                  widths={[400, 600, 900]}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  loading="lazy"
+                />
+              </a>
+              {photo.alt && <figcaption>{photo.alt}</figcaption>}
+            </figure>
+          );
+        })}
+      </div>
+    );
+  })}
+</div>
+
+<style>
+  .photo-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .photo-grid__full {
+    width: 100%;
+  }
+
+  .photo-grid__full :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .photo-grid__pair {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 768px) {
+    .photo-grid__pair {
+      flex-direction: row;
+    }
+  }
+
+  .photo-grid__half {
+    flex: 1;
+  }
+
+  .photo-grid__half :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .photo-grid a {
+    display: block;
+    cursor: zoom-in;
+  }
+
+  figcaption {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    margin-top: var(--spacing-sm);
+    text-align: center;
+  }
+</style>
