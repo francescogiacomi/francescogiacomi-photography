@@ -5,10 +5,6 @@ import { getCollection } from 'astro:content';
 
 const allCollections = await getCollection('collections');
 const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
-
-const currentYear = new Date().getFullYear();
-const years = Array.from({ length: currentYear - 2022 + 1 }, (_, i) => 2022 + i).reverse();
-const continents = [...new Set(sorted.map((c) => c.data.continent))].sort();
 ---
 
 <BaseLayout
@@ -20,136 +16,18 @@ const continents = [...new Set(sorted.map((c) => c.data.continent))].sort();
       <h1>Collections</h1>
     </header>
 
-    <div class="filters" id="filters">
-      <div class="chip-dropdown" data-filter="year">
-        <button class="chip" type="button" aria-expanded="false">
-          <span class="chip__label">Tutti gli anni</span>
-          <svg class="chip__arrow" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"></polyline></svg>
-        </button>
-        <div class="chip-dropdown__panel">
-          <button class="chip-dropdown__option is-selected" data-value="all" type="button">Tutti gli anni</button>
-          {years.map((y) => (
-            <button class="chip-dropdown__option" data-value={String(y)} type="button">{y}</button>
-          ))}
-        </div>
-      </div>
-
-      <div class="chip-dropdown" data-filter="continent">
-        <button class="chip" type="button" aria-expanded="false">
-          <span class="chip__label">Tutti i continenti</span>
-          <svg class="chip__arrow" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"></polyline></svg>
-        </button>
-        <div class="chip-dropdown__panel">
-          <button class="chip-dropdown__option is-selected" data-value="all" type="button">Tutti</button>
-          {continents.map((c) => (
-            <button class="chip-dropdown__option" data-value={c} type="button">{c}</button>
-          ))}
-        </div>
-      </div>
-
-      <button class="chip chip--reset" id="filter-reset" type="button">Reset</button>
-    </div>
-
-    <div class="collections-grid" id="collections-grid">
+    <div class="collections-grid">
       {sorted.map((entry) => (
-        <div class="collections-grid__item" data-year={String(entry.data.year)} data-continent={entry.data.continent}>
-          <CollectionCard
-            title={entry.data.title}
-            slug={entry.data.slug}
-            year={entry.data.year}
-            cover={entry.data.cover}
-          />
-        </div>
+        <CollectionCard
+          title={entry.data.title}
+          slug={entry.data.slug}
+          year={entry.data.year}
+          cover={entry.data.cover}
+        />
       ))}
     </div>
-
-    <p class="collections-empty" id="collections-empty" hidden>
-      Nessuna collection per questa selezione.
-    </p>
   </section>
 </BaseLayout>
-
-<script>
-  const grid = document.getElementById('collections-grid')!;
-  const empty = document.getElementById('collections-empty')!;
-  const items = grid.querySelectorAll<HTMLElement>('.collections-grid__item');
-  const resetBtn = document.getElementById('filter-reset')!;
-  const dropdowns = document.querySelectorAll<HTMLElement>('.chip-dropdown');
-
-  const state: Record<string, string> = { year: 'all', continent: 'all' };
-
-  function applyFilters() {
-    let visible = 0;
-    items.forEach((item) => {
-      const matchYear = state.year === 'all' || item.dataset.year === state.year;
-      const matchContinent = state.continent === 'all' || item.dataset.continent === state.continent;
-      const show = matchYear && matchContinent;
-      item.style.display = show ? '' : 'none';
-      if (show) visible++;
-    });
-    empty.hidden = visible > 0;
-  }
-
-  dropdowns.forEach((dropdown) => {
-    const chip = dropdown.querySelector('.chip')!;
-    const panel = dropdown.querySelector('.chip-dropdown__panel')!;
-    const label = chip.querySelector('.chip__label')!;
-    const filterType = dropdown.dataset.filter!;
-
-    chip.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const wasOpen = dropdown.classList.contains('is-open');
-      closeAll();
-      if (!wasOpen) {
-        dropdown.classList.add('is-open');
-        chip.setAttribute('aria-expanded', 'true');
-      }
-    });
-
-    panel.querySelectorAll('.chip-dropdown__option').forEach((opt) => {
-      opt.addEventListener('click', () => {
-        const value = (opt as HTMLElement).dataset.value!;
-        state[filterType] = value;
-        label.textContent = opt.textContent;
-
-        panel.querySelectorAll('.chip-dropdown__option').forEach((o) =>
-          o.classList.toggle('is-selected', o === opt)
-        );
-
-        chip.classList.toggle('is-active', value !== 'all');
-        closeAll();
-        applyFilters();
-      });
-    });
-  });
-
-  resetBtn.addEventListener('click', () => {
-    state.year = 'all';
-    state.continent = 'all';
-
-    dropdowns.forEach((dropdown) => {
-      const chip = dropdown.querySelector('.chip')!;
-      const label = chip.querySelector('.chip__label')!;
-      const options = dropdown.querySelectorAll('.chip-dropdown__option');
-      const defaultLabel = options[0]?.textContent || '';
-
-      label.textContent = defaultLabel;
-      chip.classList.remove('is-active');
-      options.forEach((o, i) => o.classList.toggle('is-selected', i === 0));
-    });
-
-    applyFilters();
-  });
-
-  function closeAll() {
-    dropdowns.forEach((d) => {
-      d.classList.remove('is-open');
-      d.querySelector('.chip')?.setAttribute('aria-expanded', 'false');
-    });
-  }
-
-  document.addEventListener('click', closeAll);
-</script>
 
 <style>
   .collections-page {
@@ -158,7 +36,7 @@ const continents = [...new Set(sorted.map((c) => c.data.continent))].sort();
 
   .collections-page__header {
     text-align: center;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
   }
 
   .collections-page__header h1 {
@@ -167,116 +45,6 @@ const continents = [...new Set(sorted.map((c) => c.data.continent))].sort();
     letter-spacing: 0.01em;
   }
 
-  .filters {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: var(--spacing-xl);
-    flex-wrap: wrap;
-  }
-
-  /* Chip base */
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    padding: 0.45rem 0.85rem;
-    border-radius: 100px;
-    border: 1px solid var(--color-border);
-    color: var(--color-text);
-    background: var(--color-bg);
-    transition: all var(--transition);
-    white-space: nowrap;
-  }
-
-  .chip:hover {
-    border-color: var(--color-text);
-  }
-
-  .chip.is-active {
-    background: var(--color-text);
-    color: var(--color-bg);
-    border-color: var(--color-text);
-  }
-
-  .chip.is-active .chip__arrow {
-    stroke: var(--color-bg);
-  }
-
-  .chip__arrow {
-    transition: transform 0.25s ease;
-  }
-
-  .is-open > .chip .chip__arrow {
-    transform: rotate(180deg);
-  }
-
-  .chip--reset {
-    color: var(--color-text-muted);
-  }
-
-  .chip--reset:hover {
-    color: var(--color-text);
-  }
-
-  /* Dropdown wrapper */
-  .chip-dropdown {
-    position: relative;
-  }
-
-  .chip-dropdown__panel {
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
-    min-width: 100%;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    padding: 0.35rem 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-4px);
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
-    z-index: 50;
-  }
-
-  .chip-dropdown.is-open .chip-dropdown__panel {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .chip-dropdown__option {
-    display: block;
-    width: 100%;
-    text-align: left;
-    font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    font-weight: 400;
-    padding: 0.45rem 1rem;
-    color: var(--color-text-muted);
-    background: none;
-    border: none;
-    transition: all 0.15s ease;
-    white-space: nowrap;
-  }
-
-  .chip-dropdown__option:hover {
-    color: var(--color-text);
-    background: #f5f5f5;
-  }
-
-  .chip-dropdown__option.is-selected {
-    color: var(--color-text);
-    font-weight: 500;
-  }
-
-  /* Grid */
   .collections-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -293,12 +61,5 @@ const continents = [...new Set(sorted.map((c) => c.data.continent))].sort();
     .collections-grid {
       grid-template-columns: repeat(3, 1fr);
     }
-  }
-
-  .collections-empty {
-    text-align: center;
-    color: var(--color-text-muted);
-    padding: var(--spacing-2xl) 0;
-    font-size: 1.0625rem;
   }
 </style>

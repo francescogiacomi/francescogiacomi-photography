@@ -36,7 +36,7 @@ body {
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: url('/cursor-camera.svg') 16 16, auto;
+  cursor: url('/cursor-dot.svg') 10 10, auto;
 }
 
 h1, h2, h3, h4 {
