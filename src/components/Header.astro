@@ -9,7 +9,7 @@ const currentPath = Astro.url.pathname;
 
 <header class:list={['header', { 'header--transparent': transparent }]}>
   <div class="header__inner">
-    <a href="/" class="header__logo">Francesco Giacomi</a>
+    <a href="/" class="header__logo">francescogiacomi</a>
     <nav class="header__nav" id="main-nav">
       <a href="/collections" class:list={{ active: currentPath.startsWith('/collections') }}>Collections</a>
       <a href="/about" class:list={{ active: currentPath === '/about' }}>About</a>
@@ -76,17 +76,14 @@ const currentPath = Astro.url.pathname;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: var(--spacing-md) var(--spacing-lg);
+    padding: var(--spacing-md) 32px;
   }
 
   .header__logo {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 1.25rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
     transition: opacity var(--transition);
   }
 
@@ -189,9 +186,9 @@ const currentPath = Astro.url.pathname;
 
   .mobile-overlay__nav a {
     color: #fff;
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     transition: opacity var(--transition);

@@ -4,8 +4,7 @@
   --color-text-muted: #6b6b6b;
   --color-border: #e5e5e5;
   --color-overlay: rgba(0, 0, 0, 0.45);
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Geist Sans', system-ui, -apple-system, sans-serif;
   --max-width: 1200px;
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -40,7 +39,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-weight: 600;
   line-height: 1.2;
 }
