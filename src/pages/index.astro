@@ -9,7 +9,6 @@ const allCollections = await getCollection('collections');
 const latest = allCollections
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 6);
-const subtitle = latest.map((c) => c.data.title).join(' · ');
 ---
 
 <BaseLayout
@@ -44,19 +43,16 @@ const subtitle = latest.map((c) => c.data.title).join(' · ');
   </section>
 
   <section class="latest">
-    <div class="container">
-      <h2 class="latest__heading">Latest Works</h2>
-      <p class="latest__sub">{subtitle}</p>
-      <div class="latest__grid">
-        {latest.map((entry) => (
-          <CollectionCard
-            title={entry.data.title}
-            slug={entry.data.slug}
-            year={entry.data.year}
-            cover={entry.data.cover}
-          />
-        ))}
-      </div>
+    <h2 class="latest__heading">Latest Works</h2>
+    <div class="latest__grid">
+      {latest.map((entry) => (
+        <CollectionCard
+          title={entry.data.title}
+          slug={entry.data.slug}
+          year={entry.data.year}
+          cover={entry.data.cover}
+        />
+      ))}
     </div>
   </section>
 </BaseLayout>
@@ -128,7 +124,7 @@ const subtitle = latest.map((c) => c.data.title).join(' · ');
   }
 
   .latest {
-    padding: var(--spacing-xl) 0 var(--spacing-2xl);
+    padding: var(--spacing-xl) 32px var(--spacing-2xl);
   }
 
   .latest__heading {
@@ -136,20 +132,13 @@ const subtitle = latest.map((c) => c.data.title).join(' · ');
     font-weight: 600;
     letter-spacing: 0.01em;
     text-align: center;
-  }
-
-  .latest__sub {
-    text-align: center;
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    margin-top: var(--spacing-xs);
     margin-bottom: var(--spacing-xl);
   }
 
   .latest__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--spacing-xl);
+    gap: var(--spacing-md);
   }
 
   @media (min-width: 640px) {
