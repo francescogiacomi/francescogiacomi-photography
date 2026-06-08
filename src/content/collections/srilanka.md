@@ -2,12 +2,12 @@
 title: "Sri Lanka"
 slug: "srilanka"
 location: "Sri Lanka"
-year: 2023
+year: 2022
 continent: "Asia"
-date: 2023-07-20
+date: 2022-07-20
 description: "Templi dorati, piantagioni di tè e coste infinite — l'isola che non ti aspetti."
 cover: ../../assets/images/collections/srilanka/cover.jpg
-order: 3
+order: 5
 forSale: false
 photos:
   - src: "srilanka/01.jpg"
