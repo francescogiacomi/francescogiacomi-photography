@@ -15,8 +15,47 @@ const currentPath = Astro.url.pathname;
       <a href="/about" class:list={{ active: currentPath === '/about' }}>About</a>
       <a href="/contact" class:list={{ active: currentPath === '/contact' }}>Contact</a>
     </nav>
+    <button
+      class="header__toggle"
+      id="menu-toggle"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 </header>
+
+<div class="mobile-overlay" id="mobile-overlay">
+  <nav class="mobile-overlay__nav">
+    <a href="/collections">Collections</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </nav>
+</div>
+
+<script>
+  const toggle = document.getElementById('menu-toggle')!;
+  const overlay = document.getElementById('mobile-overlay')!;
+
+  toggle.addEventListener('click', () => {
+    const isOpen = overlay.classList.toggle('is-open');
+    toggle.classList.toggle('is-open', isOpen);
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  overlay.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      overlay.classList.remove('is-open');
+      toggle.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
 
 <style>
   .header {
@@ -57,9 +96,18 @@ const currentPath = Astro.url.pathname;
     color: #fff;
   }
 
+  .header--transparent .header__toggle span {
+    background: #fff;
+  }
+
+  /* Desktop: nav visible, hamburger hidden */
   .header__nav {
     display: flex;
     gap: var(--spacing-lg);
+  }
+
+  .header__toggle {
+    display: none;
   }
 
   .header__nav a {
@@ -72,6 +120,85 @@ const currentPath = Astro.url.pathname;
 
   .header__nav a:hover,
   .header__nav a.active {
+    opacity: 0.7;
+  }
+
+  /* Tablet & mobile: hamburger visible, nav hidden */
+  @media (max-width: 768px) {
+    .header__nav {
+      display: none;
+    }
+
+    .header__toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+      z-index: 110;
+    }
+  }
+
+  .header__toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-text);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+  }
+
+  .header__toggle.is-open span {
+    background: #fff;
+  }
+
+  .header__toggle.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .header__toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header__toggle.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Fullscreen overlay */
+  .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 105;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .mobile-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-overlay__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xl);
+  }
+
+  .mobile-overlay__nav a {
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: opacity var(--transition);
+  }
+
+  .mobile-overlay__nav a:hover {
     opacity: 0.7;
   }
 </style>
