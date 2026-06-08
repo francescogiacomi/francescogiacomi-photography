@@ -1,7 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
+import CollectionCard from '../components/CollectionCard.astro';
+import { getCollection } from 'astro:content';
 import heroImage from '../assets/images/hero.jpg';
+
+const allCollections = await getCollection('collections');
+const latest = allCollections
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 6);
+const subtitle = latest.map((c) => c.data.title).join(' · ');
 ---
 
 <BaseLayout
@@ -32,7 +40,23 @@ import heroImage from '../assets/images/hero.jpg';
   <section class="intro" id="intro">
     <div class="container">
       <p>Photographs born from summer travels. Stories told through landscapes, light, and the quiet moments in between.</p>
-      <a href="/collections" class="intro__link">View Collections &rarr;</a>
+    </div>
+  </section>
+
+  <section class="latest">
+    <div class="container">
+      <h2 class="latest__heading">Latest Works</h2>
+      <p class="latest__sub">{subtitle}</p>
+      <div class="latest__grid">
+        {latest.map((entry) => (
+          <CollectionCard
+            title={entry.data.title}
+            slug={entry.data.slug}
+            year={entry.data.year}
+            cover={entry.data.cover}
+          />
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -91,32 +115,52 @@ import heroImage from '../assets/images/hero.jpg';
   }
 
   .intro {
-    padding: var(--spacing-2xl) 0;
+    padding: var(--spacing-2xl) 0 var(--spacing-xl);
     text-align: center;
   }
 
   .intro p {
-    font-family: var(--font-sans);
-    font-size: clamp(1.25rem, 3vw, 1.75rem);
-    line-height: 1.6;
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    line-height: 1.7;
     color: var(--color-text-muted);
-    max-width: 700px;
+    max-width: 650px;
     margin: 0 auto;
   }
 
-  .intro__link {
-    display: inline-block;
-    margin-top: var(--spacing-lg);
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    border-bottom: 1px solid var(--color-text);
-    padding-bottom: 2px;
-    transition: opacity var(--transition);
+  .latest {
+    padding: var(--spacing-xl) 0 var(--spacing-2xl);
   }
 
-  .intro__link:hover {
-    opacity: 0.6;
+  .latest__heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-align: center;
+  }
+
+  .latest__sub {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .latest__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  @media (min-width: 640px) {
+    .latest__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .latest__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 </style>

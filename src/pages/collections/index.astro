@@ -4,7 +4,11 @@ import CollectionCard from '../../components/CollectionCard.astro';
 import { getCollection } from 'astro:content';
 
 const allCollections = await getCollection('collections');
-const sorted = allCollections.sort((a, b) => a.data.order - b.data.order || b.data.date.getTime() - a.data.date.getTime());
+const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
+
+const currentYear = new Date().getFullYear();
+const years = Array.from({ length: currentYear - 2022 + 1 }, (_, i) => 2022 + i).reverse();
+const continents = [...new Set(sorted.map((c) => c.data.continent))].sort();
 ---
 
 <BaseLayout
@@ -16,40 +20,134 @@ const sorted = allCollections.sort((a, b) => a.data.order - b.data.order || b.da
       <header class="collections-page__header">
         <h1>Collections</h1>
       </header>
-      <div class="collections-grid">
+
+      <div class="filters" id="filters">
+        <div class="filters__group">
+          <button class="filters__btn is-active" data-filter="year" data-value="all">All years</button>
+          {years.map((y) => (
+            <button class="filters__btn" data-filter="year" data-value={String(y)}>{y}</button>
+          ))}
+        </div>
+        <div class="filters__group">
+          <button class="filters__btn is-active" data-filter="continent" data-value="all">All</button>
+          {continents.map((c) => (
+            <button class="filters__btn" data-filter="continent" data-value={c}>{c}</button>
+          ))}
+        </div>
+      </div>
+
+      <div class="collections-grid" id="collections-grid">
         {sorted.map((entry) => (
-          <CollectionCard
-            title={entry.data.title}
-            slug={entry.data.slug}
-            location={entry.data.location}
-            year={entry.data.year}
-            cover={entry.data.cover}
-          />
+          <div class="collections-grid__item" data-year={String(entry.data.year)} data-continent={entry.data.continent}>
+            <CollectionCard
+              title={entry.data.title}
+              slug={entry.data.slug}
+              year={entry.data.year}
+              cover={entry.data.cover}
+            />
+          </div>
         ))}
       </div>
+
+      <p class="collections-empty" id="collections-empty" hidden>
+        Nessuna collection per questa selezione.
+      </p>
     </div>
   </section>
 </BaseLayout>
 
+<script>
+  const filters = document.getElementById('filters')!;
+  const grid = document.getElementById('collections-grid')!;
+  const empty = document.getElementById('collections-empty')!;
+  const items = grid.querySelectorAll<HTMLElement>('.collections-grid__item');
+
+  let activeYear = 'all';
+  let activeContinent = 'all';
+
+  filters.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('.filters__btn') as HTMLElement | null;
+    if (!btn) return;
+
+    const filterType = btn.dataset.filter!;
+    const value = btn.dataset.value!;
+
+    if (filterType === 'year') activeYear = value;
+    if (filterType === 'continent') activeContinent = value;
+
+    filters.querySelectorAll(`.filters__btn[data-filter="${filterType}"]`).forEach((b) =>
+      b.classList.toggle('is-active', b === btn)
+    );
+
+    let visible = 0;
+    items.forEach((item) => {
+      const matchYear = activeYear === 'all' || item.dataset.year === activeYear;
+      const matchContinent = activeContinent === 'all' || item.dataset.continent === activeContinent;
+      const show = matchYear && matchContinent;
+      item.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    empty.hidden = visible > 0;
+  });
+</script>
+
 <style>
   .collections-page {
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-xl) 0 var(--spacing-2xl);
   }
 
   .collections-page__header {
     text-align: center;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
   }
 
   .collections-page__header h1 {
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .filters__group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-xs);
+  }
+
+  .filters__btn {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    transition: all var(--transition);
+  }
+
+  .filters__btn:hover {
+    color: var(--color-text);
+    border-color: var(--color-text);
+  }
+
+  .filters__btn.is-active {
+    background: var(--color-text);
+    color: var(--color-bg);
+    border-color: var(--color-text);
   }
 
   .collections-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-xl);
   }
 
   @media (min-width: 640px) {
@@ -62,5 +160,12 @@ const sorted = allCollections.sort((a, b) => a.data.order - b.data.order || b.da
     .collections-grid {
       grid-template-columns: repeat(3, 1fr);
     }
+  }
+
+  .collections-empty {
+    text-align: center;
+    color: var(--color-text-muted);
+    padding: var(--spacing-2xl) 0;
+    font-size: 1.0625rem;
   }
 </style>
