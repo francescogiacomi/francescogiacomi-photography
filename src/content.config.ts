@@ -9,6 +9,7 @@ const photoCollections = defineCollection({
       slug: z.string(),
       location: z.string(),
       year: z.number(),
+      continent: z.string(),
       date: z.coerce.date(),
       description: z.string(),
       cover: image(),
