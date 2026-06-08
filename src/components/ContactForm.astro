@@ -1,0 +1,93 @@
+---
+---
+
+<form class="contact-form" id="contact-form" action="#" method="POST">
+  <div class="contact-form__field">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required autocomplete="name" />
+  </div>
+  <div class="contact-form__field">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required autocomplete="email" />
+  </div>
+  <div class="contact-form__field">
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="6" required></textarea>
+  </div>
+  <button type="submit" class="contact-form__submit">Send Message</button>
+</form>
+
+<div class="contact-form__success" id="form-success" hidden>
+  <p>Thank you for your message. I'll get back to you soon.</p>
+</div>
+
+<style>
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .contact-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .contact-form__field label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+  }
+
+  .contact-form__field input,
+  .contact-form__field textarea {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+    transition: border-color var(--transition);
+  }
+
+  .contact-form__field input:focus,
+  .contact-form__field textarea:focus {
+    outline: none;
+    border-color: var(--color-text);
+  }
+
+  .contact-form__field textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+
+  .contact-form__submit {
+    align-self: flex-start;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.875rem 2.5rem;
+    background: var(--color-text);
+    color: var(--color-bg);
+    transition: opacity var(--transition);
+  }
+
+  .contact-form__submit:hover {
+    opacity: 0.8;
+  }
+
+  .contact-form__success {
+    text-align: center;
+    padding: var(--spacing-xl);
+  }
+
+  .contact-form__success p {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+  }
+</style>

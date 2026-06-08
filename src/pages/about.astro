@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import portrait from '../assets/images/about-portrait.jpg';
+---
+
+<BaseLayout
+  title="About | Francesco Giacomi"
+  description="About Francesco Giacomi — landscape and travel photographer."
+>
+  <section class="about">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__image">
+          <Image
+            src={portrait}
+            alt="Francesco Giacomi"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 768px) 100vw, 45vw"
+            loading="eager"
+          />
+        </div>
+        <div class="about__text">
+          <h1>About</h1>
+          <p>
+            I'm Francesco — not a professional photographer, just someone who has carried a camera on every trip for as long as I can remember.
+          </p>
+          <p>
+            Photography started as a way to hold on to moments from summer travels. Over the years it became something more: a reason to wake up before dawn, to stay out in the cold, to notice the way light falls on a mountain face or the color of water in a glacial lake.
+          </p>
+          <p>
+            This site is a collection of those moments — organized by trip, told the way I remember them. The photos are honest: no heavy post-processing, no tricks. Just the places as I found them, with whatever light was there.
+          </p>
+          <p>
+            I shoot mostly landscapes during my travels, chasing the kind of scenes that make you stop walking and just look. If any of these photographs resonate with you, I'd love to hear about it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .about__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  @media (min-width: 768px) {
+    .about__grid {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+  .about__image {
+    flex: 0 0 45%;
+  }
+
+  .about__image :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .about__text {
+    flex: 1;
+  }
+
+  .about__text h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .about__text p {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .about__text p:last-child {
+    margin-bottom: 0;
+  }
+</style>

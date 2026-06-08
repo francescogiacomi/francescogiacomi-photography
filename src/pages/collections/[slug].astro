@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PhotoGrid from '../../components/PhotoGrid.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import CollectionNav from '../../components/CollectionNav.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allCollections = await getCollection('collections');
+  const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
+
+  return sorted.map((entry, index) => {
+    const prev = index > 0 ? sorted[index - 1] : undefined;
+    const next = index < sorted.length - 1 ? sorted[index + 1] : undefined;
+    return {
+      params: { slug: entry.data.slug },
+      props: {
+        entry,
+        prev: prev ? { slug: prev.data.slug, title: prev.data.title } : undefined,
+        next: next ? { slug: next.data.slug, title: next.data.title } : undefined,
+      },
+    };
+  });
+}
+
+const { entry, prev, next } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout
+  title={`${entry.data.title} | Francesco Giacomi`}
+  description={entry.data.description}
+>
+  <article class="collection-page">
+    <header class="collection-page__header">
+      <div class="container">
+        <span class="collection-page__meta">{entry.data.location} &middot; {entry.data.year}</span>
+        <h1>{entry.data.title}</h1>
+        <div class="collection-page__intro">
+          <Content />
+        </div>
+      </div>
+    </header>
+
+    <section class="collection-page__photos">
+      <PhotoGrid photos={entry.data.photos} />
+    </section>
+
+    <Lightbox />
+    <CollectionNav prev={prev} next={next} />
+  </article>
+</BaseLayout>
+
+<style>
+  .collection-page__header {
+    text-align: center;
+    padding: var(--spacing-xl) 0 var(--spacing-2xl);
+  }
+
+  .collection-page__meta {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .collection-page__header h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .collection-page__intro {
+    max-width: 700px;
+    margin: var(--spacing-lg) auto 0;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  .collection-page__photos {
+    padding-bottom: var(--spacing-xl);
+  }
+</style>
