@@ -25,123 +25,68 @@ function resolveImage(src: string): ImageMetadata {
   if (!key) throw new Error(`Image not found: ${src}`);
   return allImages[key].default;
 }
-
-type Row = { type: 'full'; photo: Photo } | { type: 'pair'; photos: [Photo, Photo] };
-const rows: Row[] = [];
-let i = 0;
-while (i < photos.length) {
-  const photo = photos[i];
-  if (photo.layout === 'half' && i + 1 < photos.length && photos[i + 1].layout === 'half') {
-    rows.push({ type: 'pair', photos: [photo, photos[i + 1]] });
-    i += 2;
-  } else {
-    rows.push({ type: 'full', photo });
-    i++;
-  }
-}
 ---
 
 <div class="photo-grid" id="gallery">
-  {rows.map((row) => {
-    if (row.type === 'full') {
-      const resolved = resolveImage(row.photo.src);
-      return (
-        <figure class="photo-grid__full">
-          <a
-            href={resolved.src}
-            data-pswp-width={row.photo.width}
-            data-pswp-height={row.photo.height}
-            target="_blank"
-          >
-            <Image
-              src={resolved}
-              alt={row.photo.alt}
-              widths={[800, 1200, 1800]}
-              sizes="(max-width: 1200px) 100vw, 1200px"
-              loading="lazy"
-            />
-          </a>
-          {row.photo.alt && <figcaption>{row.photo.alt}</figcaption>}
-        </figure>
-      );
-    }
+  {photos.map((photo) => {
+    const resolved = resolveImage(photo.src);
     return (
-      <div class="photo-grid__pair">
-        {row.photos.map((photo) => {
-          const resolved = resolveImage(photo.src);
-          return (
-            <figure class="photo-grid__half">
-              <a
-                href={resolved.src}
-                data-pswp-width={photo.width}
-                data-pswp-height={photo.height}
-                target="_blank"
-              >
-                <Image
-                  src={resolved}
-                  alt={photo.alt}
-                  widths={[400, 600, 900]}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  loading="lazy"
-                />
-              </a>
-              {photo.alt && <figcaption>{photo.alt}</figcaption>}
-            </figure>
-          );
-        })}
-      </div>
+      <a
+        href={resolved.src}
+        data-pswp-width={photo.width}
+        data-pswp-height={photo.height}
+        target="_blank"
+        class="photo-grid__item"
+      >
+        <Image
+          src={resolved}
+          alt={photo.alt}
+          widths={[200, 350, 500]}
+          sizes="(max-width: 640px) 33vw, (max-width: 1024px) 20vw, 14vw"
+          loading="lazy"
+        />
+      </a>
     );
   })}
 </div>
 
 <style>
   .photo-grid {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    padding: 0 32px;
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 var(--spacing-lg);
   }
 
-  .photo-grid__full {
-    width: 100%;
-  }
-
-  .photo-grid__full :global(img) {
-    width: 100%;
-    height: auto;
-  }
-
-  .photo-grid__pair {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-  }
-
-  @media (min-width: 768px) {
-    .photo-grid__pair {
-      flex-direction: row;
+  @media (min-width: 640px) {
+    .photo-grid {
+      grid-template-columns: repeat(5, 1fr);
     }
   }
 
-  .photo-grid__half {
-    flex: 1;
+  @media (min-width: 1024px) {
+    .photo-grid {
+      grid-template-columns: repeat(7, 1fr);
+    }
   }
 
-  .photo-grid__half :global(img) {
-    width: 100%;
-    height: auto;
-  }
-
-  .photo-grid a {
+  .photo-grid__item {
     display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--color-bg-raised);
   }
 
-  figcaption {
-    font-size: 0.8125rem;
-    color: var(--color-text-muted);
-    margin-top: var(--spacing-sm);
-    text-align: center;
+  .photo-grid__item :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+  }
+
+  .photo-grid__item:hover :global(img) {
+    transform: scale(1.05);
   }
 </style>
