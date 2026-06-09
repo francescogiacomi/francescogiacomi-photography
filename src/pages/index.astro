@@ -38,24 +38,52 @@ const latest = allCollections
 
   <section class="intro" id="intro">
     <div class="container">
-      <p>Photographs born from summer travels. Stories told through landscapes, light, and the quiet moments in between.</p>
+      <p class="reveal">Photographs born from summer travels. Stories told through landscapes, light, and the quiet moments in between.</p>
     </div>
   </section>
 
   <section class="latest">
-    <h2 class="latest__heading">Latest Works</h2>
+    <h2 class="latest__heading reveal">Latest Works</h2>
     <div class="latest__grid">
-      {latest.map((entry) => (
-        <CollectionCard
-          title={entry.data.title}
-          slug={entry.data.slug}
-          year={entry.data.year}
-          cover={entry.data.cover}
-        />
+      {latest.map((entry, i) => (
+        <div class="reveal" style={`transition-delay: ${i * 0.1}s`}>
+          <CollectionCard
+            title={entry.data.title}
+            slug={entry.data.slug}
+            year={entry.data.year}
+            cover={entry.data.cover}
+          />
+        </div>
       ))}
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+  reveals.forEach((el) => observer.observe(el));
+
+  // Lazy image fade-in
+  document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
+    if ((img as HTMLImageElement).complete) {
+      img.classList.add('is-loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('is-loaded'));
+    }
+  });
+</script>
 
 <style>
   .hero {
@@ -69,12 +97,18 @@ const latest = allCollections
   .hero__image {
     position: absolute;
     inset: 0;
+    animation: kenBurns 20s ease-in-out infinite alternate;
   }
 
   .hero__image :global(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  @keyframes kenBurns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.06); }
   }
 
   .hero__scroll {
