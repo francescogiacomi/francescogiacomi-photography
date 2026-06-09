@@ -16,8 +16,8 @@ const { title, slug, year, cover } = Astro.props;
     <Image
       src={cover}
       alt={title}
-      widths={[400, 600, 800]}
-      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      widths={[300, 450, 600]}
+      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
       loading="lazy"
     />
   </div>
@@ -48,17 +48,17 @@ const { title, slug, year, cover } = Astro.props;
   }
 
   .card__title {
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
     font-family: var(--font-sans);
-    font-size: 1.125rem;
+    font-size: 0.875rem;
     font-weight: 500;
     letter-spacing: 0.01em;
   }
 
   .card__year {
     display: block;
-    margin-top: 0.25rem;
-    font-size: 0.8125rem;
+    margin-top: 0.15rem;
+    font-size: 0.75rem;
     color: var(--color-text-muted);
   }
 </style>
