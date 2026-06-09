@@ -1,8 +1,9 @@
 :root {
-  --color-bg: #ffffff;
-  --color-text: #1a1a1a;
-  --color-text-muted: #6b6b6b;
-  --color-border: #e5e5e5;
+  --color-bg: #1a1512;
+  --color-bg-raised: #221b16;
+  --color-text: #e8e4e0;
+  --color-text-muted: #8a7e75;
+  --color-border: #2e2620;
   --color-overlay: rgba(0, 0, 0, 0.45);
   --font-sans: 'Geist Sans', system-ui, -apple-system, sans-serif;
   --max-width: 1200px;
@@ -77,6 +78,29 @@ button {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
+}
+
+/* Scroll reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Lazy image fade-in */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+img[loading="lazy"].is-loaded,
+img.is-loaded {
+  opacity: 1;
 }
 
 .sr-only {
