@@ -50,9 +50,15 @@ const { Content } = await render(entry);
       </div>
     </section>
 
-    <section class="collection-story">
-      <div class="collection-story__text reveal">
-        <Content />
+    <section class="collection-story reveal">
+      <div class="collection-story__inner">
+        <div class="collection-story__left">
+          <h2 class="collection-story__title">{entry.data.title}</h2>
+          <span class="collection-story__meta">{entry.data.location} · {entry.data.year}</span>
+        </div>
+        <div class="collection-story__right">
+          <Content />
+        </div>
       </div>
     </section>
 
@@ -121,9 +127,8 @@ const { Content } = await render(entry);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
-    padding-bottom: 80px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 50%);
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.25);
   }
 
   .collection-hero__title {
@@ -145,23 +150,63 @@ const { Content } = await render(entry);
   }
 
   .collection-story {
-    padding: var(--spacing-2xl) var(--spacing-lg);
+    padding: var(--spacing-2xl) 32px;
   }
 
-  .collection-story__text {
-    max-width: 650px;
+  .collection-story__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    max-width: var(--max-width);
     margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .collection-story__inner {
+      flex-direction: row;
+      gap: var(--spacing-xl);
+    }
+  }
+
+  .collection-story__left {
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 768px) {
+    .collection-story__left {
+      width: 35%;
+    }
+  }
+
+  .collection-story__title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .collection-story__meta {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .collection-story__right {
+    flex: 1;
     font-size: 1.0625rem;
     line-height: 1.9;
     color: var(--color-text-muted);
-    text-align: center;
   }
 
-  .collection-story__text :global(p) {
+  .collection-story__right :global(p) {
     margin-bottom: var(--spacing-md);
   }
 
-  .collection-story__text :global(p:last-child) {
+  .collection-story__right :global(p:last-child) {
     margin-bottom: 0;
   }
 

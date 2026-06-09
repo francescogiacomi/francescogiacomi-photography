@@ -171,19 +171,19 @@ const latest = allCollections
 
   .latest__grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-md);
   }
 
   @media (min-width: 640px) {
     .latest__grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
   @media (min-width: 1024px) {
     .latest__grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 </style>
