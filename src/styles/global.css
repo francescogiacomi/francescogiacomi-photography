@@ -40,6 +40,10 @@ body {
   cursor: url('/cursor-dot.svg') 10 10, auto;
 }
 
+a, button, [role="button"], input[type="submit"], select, label[for] {
+  cursor: url('/cursor-dot.svg') 10 10, auto !important;
+}
+
 h1, h2, h3, h4 {
   font-family: var(--font-sans);
   font-weight: 600;
@@ -63,7 +67,7 @@ img {
 
 button {
   font: inherit;
-  cursor: pointer;
+  cursor: url('/cursor-dot.svg') 10 10, auto;
   border: none;
   background: none;
 }
