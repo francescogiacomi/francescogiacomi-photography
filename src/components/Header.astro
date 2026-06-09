@@ -9,6 +9,13 @@ const { transparent = false } = Astro.props;
 <header class:list={['header', { 'header--transparent': transparent }]} id="site-header">
   <div class="header__inner">
     <a href="/" class="header__logo">francescogiacomi</a>
+    <a href="https://www.instagram.com/fncgcm/" target="_blank" rel="noopener noreferrer" class="header__instagram" aria-label="Instagram">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" />
+        <circle cx="12" cy="12" r="5" />
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+      </svg>
+    </a>
   </div>
 </header>
 
@@ -49,6 +56,7 @@ const { transparent = false } = Astro.props;
   .header__inner {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: var(--spacing-md) 32px;
   }
 
@@ -65,7 +73,19 @@ const { transparent = false } = Astro.props;
     opacity: 0.7;
   }
 
-  .header--transparent .header__logo {
+  .header--transparent .header__logo,
+  .header--transparent .header__instagram {
     color: #fff;
+  }
+
+  .header__instagram {
+    color: var(--color-text);
+    transition: opacity var(--transition);
+    display: flex;
+    align-items: center;
+  }
+
+  .header__instagram:hover {
+    opacity: 0.7;
   }
 </style>
