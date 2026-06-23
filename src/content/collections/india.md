@@ -37,4 +37,10 @@ photos:
     layout: full
 ---
 
-L'India è un paese che non puoi descrivere — lo devi vivere. Il caos di Delhi, la spiritualità di Varanasi, i colori del Rajasthan e la calma del Kerala. Tre settimane di contrasti assoluti, dove ogni giorno è un viaggio diverso.
+India was the first big journey I ever took — and from it, almost without realizing, a small photographic project was born. I had a month: a threshold to cross before starting a new chapter of my life. I left with a Fuji X-T3 and a 35mm, no expectations and no clear direction, not yet imagining I was stepping into what many call the magical world of India.
+
+If someone asks me what India is, I'd probably say it is chaos, colour, and spirituality. A world apart, where the personal space between people doesn't exist, the smells are intense, religions intertwine, and faith runs through every gesture — a faith so deep and visible it can turn an ordinary day into a sudden celebration, where a god crosses the street, improbable costumes appear, and an ocean of people moves as a single body.
+
+It's an intensely demanding journey: things often don't work, there is no order, no quiet, no pause. And yet, right in the middle of it all, something unexpected happens — the magic of a glance, of the people, of the spirit suddenly opens a world made of colour and smiles. Deep, penetrating faces watch you while slowly tilting their heads, a simple and enigmatic gesture that holds an entire dialogue — one you often don't understand, but that happens anyway, even without words.
+
+I moved without a real map — by train without quite knowing where I was, by bus, by car, by train again, and finally by plane — crossing India and letting it cross me. These photographs come from that: from a suspended time and a still-young eye, taken on tiptoe. Not to explain India, but to give back fragments of the humanity I met along the way. Because sometimes, seeing doesn't mean understanding — it simply means being present.
