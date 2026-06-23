@@ -1,9 +1,10 @@
 :root {
-  --color-bg: #1a1512;
-  --color-bg-raised: #221b16;
-  --color-text: #e8e4e0;
-  --color-text-muted: #8a7e75;
-  --color-border: #2e2620;
+  --color-bg: #D0CDCA;
+  --color-bg-raised: #C5C2BF;
+  --color-text: #2a2724;
+  --color-text-muted: #6b6560;
+  --color-border: #B8B4B0;
+  --color-accent: #3333cc;
   --color-overlay: rgba(0, 0, 0, 0.45);
   --font-sans: 'Geist Sans', system-ui, -apple-system, sans-serif;
   --max-width: 1200px;
@@ -73,8 +74,8 @@ button {
 }
 
 ::selection {
-  background-color: var(--color-text);
-  color: var(--color-bg);
+  background-color: var(--color-accent);
+  color: #fff;
 }
 
 .container {
