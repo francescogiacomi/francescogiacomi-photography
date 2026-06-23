@@ -2,9 +2,9 @@
 title: "Egitto"
 slug: "egypt"
 location: "Egitto"
-year: 2023
+year: 2025
 continent: "Africa"
-date: 2023-09-10
+date: 2025-09-10
 description: "Sabbia, piramidi e il Nilo — un viaggio nel tempo tra storia e deserto."
 cover: ../../assets/images/collections/egypt/cover.jpg
 order: 2
