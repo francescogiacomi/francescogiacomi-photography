@@ -110,6 +110,121 @@ photos:
     width: 2048
     height: 1365
     layout: full
+  - src: "india01/India_FrancescoGiacomi-27.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-28.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-29.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-30.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-32.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-34.jpg"
+    alt: "India, 2022"
+    width: 1365
+    height: 2048
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-35.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-36.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-37.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-38.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-39.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-40.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-41.jpg"
+    alt: "India, 2022"
+    width: 1365
+    height: 2048
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-42.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-43.jpg"
+    alt: "India, 2022"
+    width: 1365
+    height: 2048
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-44.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-45.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-46.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-47.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-48.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-49.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1397
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-50.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1388
+    layout: full
 ---
 
 My first big journey, and where this project began. If someone asks me what India is, I'd say chaos, colour, and faith — a world apart, where religions intertwine and an ocean of people moves as a single body.
