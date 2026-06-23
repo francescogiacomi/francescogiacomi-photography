@@ -194,9 +194,7 @@ function resolveImage(src: string): ImageMetadata {
 
   if (infoTrigger) {
     infoTrigger.addEventListener('mouseenter', openInfo);
-    // Keep open while the cursor stays anywhere in the viewer photo area;
-    // close once it leaves the whole viewer.
-    viewerSection.addEventListener('mouseleave', closeInfo);
+    infoTrigger.addEventListener('mouseleave', closeInfo);
   }
 
   // Lazy image fade-in

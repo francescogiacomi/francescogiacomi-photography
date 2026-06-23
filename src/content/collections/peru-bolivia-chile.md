@@ -227,4 +227,8 @@ photos:
     layout: full
 ---
 
-Tre paesi, un unico viaggio lungo la spina dorsale del Sudamerica. Le montagne colorate di Vinicunca, il silenzio surreale del Salar de Uyuni, e il deserto di Atacama che di notte diventa il miglior planetario del mondo. Tre settimane che hanno cambiato il modo in cui guardo i paesaggi.
+Three countries, one road through the spine of South America. From the rainbow mountains of Vinicunca to the surreal stillness of the Salar de Uyuni, and then south into the Atacama — where the desert becomes the clearest planetarium on Earth.
+
+Three weeks of altitude, dust, and silence. Markets at 4,000 metres, overnight buses across salt flats, sunrises that painted entire mountain ranges in colours I didn't know existed. The people we met carried warmth in the coldest places — sharing food, directions, and stories without a common language.
+
+This project is a record of that crossing: the landscapes that made us feel small, and the faces that made us feel welcome.
