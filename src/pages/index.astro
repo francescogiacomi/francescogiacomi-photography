@@ -51,35 +51,33 @@ const selectedPhotos = [
   </head>
   <body>
 
-    <!-- Sidebar -->
+    <!-- Desktop sidebar -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar__top">
         <a href="/" class="sidebar__name">
           <span>Francesco</span>
           <span>Giacomi</span>
         </a>
-
         <nav class="sidebar__nav">
           <a href="#" class="nav-link is-active" data-section="selected">Selected Moments</a>
           <div class="nav-group">
-            <button class="nav-link nav-link--parent" data-toggle="projects">Projects <span class="nav-arrow">▸</span></button>
-            <div class="nav-sub" id="nav-projects">
+            <span class="nav-label">Projects</span>
+            <div class="nav-sub">
               {sorted.map((entry) => (
-                <a href={`/collections/${entry.data.slug}`} class="nav-sub__link">{entry.data.title}</a>
+                <a href={`/collections/${entry.data.slug}`} class="nav-sub__link">{entry.data.title} ({entry.data.year})</a>
               ))}
             </div>
           </div>
           <a href="#" class="nav-link" data-section="bio">Bio</a>
         </nav>
       </div>
-
       <div class="sidebar__bottom">
         <div class="sidebar__social">
           <a href="https://www.instagram.com/fncgcm/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
           </a>
           <a href="https://www.linkedin.com/in/francescogiacomi/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           </a>
         </div>
         <span class="sidebar__copy">&copy; All rights reserved</span>
@@ -88,39 +86,71 @@ const selectedPhotos = [
 
     <!-- Mobile header -->
     <header class="mobile-header" id="mobile-header">
-      <a href="/" class="mobile-header__name">Francesco Giacomi</a>
+      <a href="/" class="mobile-header__name">
+        <span>Francesco</span>
+        <span>Giacomi</span>
+      </a>
       <button class="mobile-header__toggle" id="menu-toggle" aria-label="Menu">
-        <span></span><span></span><span></span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </header>
+
+    <!-- Mobile menu overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="mobile-menu__inner">
+        <button class="mobile-menu__close" id="menu-close" aria-label="Close">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <nav class="mobile-menu__nav">
+          <a href="#" class="mobile-menu__link is-active" data-section="selected">Selected Moments</a>
+          <div class="mobile-menu__group">
+            <span class="mobile-menu__label">Projects</span>
+            {sorted.map((entry) => (
+              <a href={`/collections/${entry.data.slug}`} class="mobile-menu__sub">{entry.data.title} ({entry.data.year})</a>
+            ))}
+          </div>
+          <a href="#" class="mobile-menu__link" data-section="bio">Bio</a>
+        </nav>
+        <div class="mobile-menu__bottom">
+          <div class="mobile-menu__social">
+            <a href="https://www.instagram.com/fncgcm/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/francescogiacomi/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+          <span class="mobile-menu__copy">&copy; All rights reserved</span>
+        </div>
+      </div>
+    </div>
 
     <!-- Main content -->
     <main class="main">
 
-      <!-- Selected Moments: single photo viewer -->
+      <!-- Selected Moments -->
       <section class="viewer" id="section-selected">
+        <!-- Desktop: top bar with prev/next + grid toggle -->
         <div class="viewer__top">
-          <div class="viewer__nav">
+          <div class="viewer__nav" id="viewer-nav">
             <button class="viewer__btn" id="btn-prev">Previous</button>
             <span class="viewer__sep">/</span>
             <button class="viewer__btn" id="btn-next">Next</button>
             <span class="viewer__count" id="viewer-count">(1 of {selectedPhotos.length})</span>
           </div>
-          <button class="viewer__grid-toggle" id="btn-grid" aria-label="Grid view">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
-              <rect x="0" y="0" width="4" height="4" rx="0.5"/>
-              <rect x="7" y="0" width="4" height="4" rx="0.5"/>
-              <rect x="14" y="0" width="4" height="4" rx="0.5"/>
-              <rect x="0" y="7" width="4" height="4" rx="0.5"/>
-              <rect x="7" y="7" width="4" height="4" rx="0.5"/>
-              <rect x="14" y="7" width="4" height="4" rx="0.5"/>
-              <rect x="0" y="14" width="4" height="4" rx="0.5"/>
-              <rect x="7" y="14" width="4" height="4" rx="0.5"/>
-              <rect x="14" y="14" width="4" height="4" rx="0.5"/>
+          <button class="viewer__mode-toggle" id="btn-mode" aria-label="Toggle view">
+            <svg class="icon-grid" width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+              <rect x="0" y="0" width="4" height="4" rx="0.5"/><rect x="7" y="0" width="4" height="4" rx="0.5"/><rect x="14" y="0" width="4" height="4" rx="0.5"/>
+              <rect x="0" y="7" width="4" height="4" rx="0.5"/><rect x="7" y="7" width="4" height="4" rx="0.5"/><rect x="14" y="7" width="4" height="4" rx="0.5"/>
+              <rect x="0" y="14" width="4" height="4" rx="0.5"/><rect x="7" y="14" width="4" height="4" rx="0.5"/><rect x="14" y="14" width="4" height="4" rx="0.5"/>
+            </svg>
+            <svg class="icon-single" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" style="display:none;">
+              <rect x="1" y="1" width="16" height="12" rx="1"/><line x1="1" y1="16" x2="12" y2="16"/>
             </svg>
           </button>
         </div>
 
+        <!-- Desktop: single photo viewer -->
         <div class="viewer__stage" id="viewer-stage">
           {selectedPhotos.map((photo, i) => {
             const resolved = resolveImage(photo.src);
@@ -137,10 +167,9 @@ const selectedPhotos = [
             );
           })}
         </div>
-
         <p class="viewer__caption" id="viewer-caption">{selectedPhotos[0].caption}</p>
 
-        <!-- Grid view -->
+        <!-- Desktop: grid view -->
         <div class="grid-view" id="grid-view">
           {selectedPhotos.map((photo, i) => {
             const resolved = resolveImage(photo.src);
@@ -154,6 +183,25 @@ const selectedPhotos = [
                   loading="lazy"
                 />
               </button>
+            );
+          })}
+        </div>
+
+        <!-- Mobile: scrolling feed -->
+        <div class="mobile-feed" id="mobile-feed">
+          {selectedPhotos.map((photo) => {
+            const resolved = resolveImage(photo.src);
+            return (
+              <figure class="mobile-feed__item">
+                <Image
+                  src={resolved}
+                  alt={photo.caption}
+                  widths={[600, 900, 1200]}
+                  sizes="100vw"
+                  loading="lazy"
+                />
+                <figcaption>{photo.caption}</figcaption>
+              </figure>
             );
           })}
         </div>
@@ -190,13 +238,15 @@ const selectedPhotos = [
       const countEl = document.getElementById('viewer-count');
       const gridView = document.getElementById('grid-view');
       const viewerStage = document.getElementById('viewer-stage');
-      const viewerTop = document.querySelector('.viewer__top');
+      const viewerNav = document.getElementById('viewer-nav');
+      const iconGrid = document.querySelector('.icon-grid');
+      const iconSingle = document.querySelector('.icon-single');
 
       function goTo(index) {
         slides.forEach(s => s.classList.remove('is-active'));
         slides[index].classList.add('is-active');
         captionEl.textContent = captions[index];
-        countEl.textContent = `(${index + 1} of ${total})`;
+        countEl.textContent = '(' + (index + 1) + ' of ' + total + ')';
         current = index;
       }
 
@@ -208,23 +258,23 @@ const selectedPhotos = [
         goTo(current < total - 1 ? current + 1 : 0);
       });
 
-      // Keyboard navigation
       document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') goTo(current > 0 ? current - 1 : total - 1);
         if (e.key === 'ArrowRight') goTo(current < total - 1 ? current + 1 : 0);
         if (e.key === 'Escape' && gridOpen) toggleGrid();
       });
 
-      // Grid toggle
       function toggleGrid() {
         gridOpen = !gridOpen;
         gridView.classList.toggle('is-open', gridOpen);
         viewerStage.style.display = gridOpen ? 'none' : '';
         captionEl.style.display = gridOpen ? 'none' : '';
-        viewerTop.querySelector('.viewer__nav').style.display = gridOpen ? 'none' : '';
+        viewerNav.style.display = gridOpen ? 'none' : '';
+        iconGrid.style.display = gridOpen ? 'none' : '';
+        iconSingle.style.display = gridOpen ? '' : 'none';
       }
 
-      document.getElementById('btn-grid').addEventListener('click', toggleGrid);
+      document.getElementById('btn-mode').addEventListener('click', toggleGrid);
 
       gridView.querySelectorAll('.grid-view__item').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -233,41 +283,40 @@ const selectedPhotos = [
         });
       });
 
-      // Sidebar nav - Projects toggle
-      document.querySelector('[data-toggle="projects"]').addEventListener('click', () => {
-        document.getElementById('nav-projects').classList.toggle('is-open');
-        const arrow = document.querySelector('[data-toggle="projects"] .nav-arrow');
-        arrow.textContent = document.getElementById('nav-projects').classList.contains('is-open') ? '▾' : '▸';
-      });
-
-      // Sidebar nav - section switching
+      // Sidebar nav
       document.querySelectorAll('[data-section]').forEach(link => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
           const section = link.dataset.section;
-          document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('is-active'));
-          link.classList.add('is-active');
+
+          // Desktop sidebar
+          document.querySelectorAll('.sidebar .nav-link').forEach(l => l.classList.remove('is-active'));
+          const sidebarLink = document.querySelector('.sidebar [data-section="' + section + '"]');
+          if (sidebarLink) sidebarLink.classList.add('is-active');
+
+          // Mobile menu
+          document.querySelectorAll('.mobile-menu__link').forEach(l => l.classList.remove('is-active'));
+          const mobileLink = document.querySelector('.mobile-menu [data-section="' + section + '"]');
+          if (mobileLink) mobileLink.classList.add('is-active');
 
           document.getElementById('section-selected').style.display = section === 'selected' ? '' : 'none';
           document.getElementById('section-bio').style.display = section === 'bio' ? '' : 'none';
+
+          // Close mobile menu
+          document.getElementById('mobile-menu').classList.remove('is-open');
+          document.body.style.overflow = '';
         });
       });
 
       // Mobile menu
-      const sidebar = document.getElementById('sidebar');
-      const toggle = document.getElementById('menu-toggle');
-      toggle.addEventListener('click', () => {
-        sidebar.classList.toggle('is-open');
-        toggle.classList.toggle('is-open');
-        document.body.style.overflow = sidebar.classList.contains('is-open') ? 'hidden' : '';
+      document.getElementById('menu-toggle').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.add('is-open');
+        document.body.style.overflow = 'hidden';
       });
 
-      sidebar.querySelectorAll('a[data-section], .nav-sub__link').forEach(link => {
-        link.addEventListener('click', () => {
-          sidebar.classList.remove('is-open');
-          toggle.classList.remove('is-open');
-          document.body.style.overflow = '';
-        });
+      document.getElementById('menu-close').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.remove('is-open');
+        document.body.style.overflow = '';
       });
 
       // Lazy image fade-in
@@ -284,10 +333,9 @@ const selectedPhotos = [
       body {
         overflow-x: hidden;
         margin: 0;
-        background: var(--color-bg);
       }
 
-      /* Sidebar */
+      /* ===== SIDEBAR (desktop) ===== */
       .sidebar {
         position: fixed;
         top: 0;
@@ -299,7 +347,6 @@ const selectedPhotos = [
         justify-content: space-between;
         padding: 32px 28px;
         z-index: 100;
-        background: var(--color-bg);
       }
 
       .sidebar__name {
@@ -308,145 +355,200 @@ const selectedPhotos = [
         font-size: 1.375rem;
         font-weight: 400;
         line-height: 1.2;
-        letter-spacing: -0.01em;
         color: var(--color-text);
-        margin-bottom: 32px;
+        margin-bottom: 40px;
       }
 
       .sidebar__nav {
         display: flex;
         flex-direction: column;
-        gap: 2px;
+        gap: 4px;
       }
 
       .nav-link {
         font-size: 0.8125rem;
-        font-weight: 400;
         color: var(--color-text-muted);
-        padding: 4px 0;
+        padding: 3px 0;
         transition: color var(--transition);
         text-align: left;
         display: block;
-        width: fit-content;
       }
 
-      .nav-link:hover,
-      .nav-link.is-active {
+      .nav-link:hover { color: var(--color-text); }
+      .nav-link.is-active { color: var(--color-accent); }
+
+      .nav-label {
+        display: block;
+        font-size: 0.8125rem;
+        font-weight: 500;
         color: var(--color-text);
-      }
-
-      .nav-link--parent {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-      }
-
-      .nav-arrow {
-        font-size: 0.625rem;
+        padding: 3px 0;
+        margin-top: 16px;
       }
 
       .nav-sub {
-        display: none;
-        flex-direction: column;
-        padding-left: 12px;
-        gap: 1px;
-      }
-
-      .nav-sub.is-open {
         display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-top: 4px;
       }
 
       .nav-sub__link {
         font-size: 0.75rem;
         color: var(--color-text-muted);
-        padding: 3px 0;
+        padding: 2px 0;
         transition: color var(--transition);
       }
 
-      .nav-sub__link:hover {
-        color: var(--color-text);
-      }
+      .nav-sub__link:hover { color: var(--color-text); }
 
       .sidebar__bottom {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
       }
 
       .sidebar__social {
         display: flex;
-        gap: 12px;
+        gap: 14px;
       }
 
       .sidebar__social a {
-        color: var(--color-text-muted);
-        transition: color var(--transition);
+        color: var(--color-text);
+        transition: opacity var(--transition);
       }
 
-      .sidebar__social a:hover {
-        color: var(--color-text);
-      }
+      .sidebar__social a:hover { opacity: 0.5; }
 
       .sidebar__copy {
         font-size: 0.6875rem;
         color: var(--color-text-muted);
-        letter-spacing: 0.02em;
       }
 
-      /* Mobile header */
+      /* ===== MOBILE HEADER ===== */
       .mobile-header {
         display: none;
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
+        top: 0; left: 0; right: 0;
         z-index: 110;
-        padding: 16px 20px;
-        background: var(--color-bg);
-        align-items: center;
+        padding: 20px;
+        align-items: flex-start;
         justify-content: space-between;
       }
 
       .mobile-header__name {
-        font-size: 1rem;
+        display: flex;
+        flex-direction: column;
+        font-size: 1.25rem;
         font-weight: 400;
+        line-height: 1.15;
         color: var(--color-text);
       }
 
       .mobile-header__toggle {
+        color: var(--color-text);
+        padding: 4px;
+        margin-top: 2px;
+      }
+
+      /* ===== MOBILE MENU OVERLAY ===== */
+      .mobile-menu {
+        position: fixed;
+        top: 0; right: 0;
+        width: 55%;
+        min-width: 260px;
+        height: 100vh;
+        z-index: 200;
+        background: var(--color-bg);
+        border-left: 1px solid var(--color-border);
+        transform: translateX(100%);
+        transition: transform 0.35s ease;
+        overflow-y: auto;
+      }
+
+      .mobile-menu.is-open {
+        transform: translateX(0);
+      }
+
+      .mobile-menu__inner {
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        justify-content: space-between;
+        min-height: 100vh;
+        padding: 20px 24px 32px;
+      }
+
+      .mobile-menu__close {
+        align-self: flex-end;
+        color: var(--color-accent);
         padding: 4px;
+        margin-bottom: 24px;
       }
 
-      .mobile-header__toggle span {
+      .mobile-menu__nav {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .mobile-menu__link {
+        font-size: 0.9375rem;
+        color: var(--color-text-muted);
+        padding: 4px 0;
+      }
+
+      .mobile-menu__link.is-active {
+        color: var(--color-accent);
+      }
+
+      .mobile-menu__label {
         display: block;
-        width: 22px;
-        height: 1.5px;
-        background: var(--color-text);
-        transition: transform 0.3s ease, opacity 0.3s ease;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: var(--color-text);
+        padding: 4px 0;
+        margin-top: 20px;
       }
 
-      .mobile-header__toggle.is-open span:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
+      .mobile-menu__sub {
+        font-size: 0.8125rem;
+        color: var(--color-text-muted);
+        padding: 3px 0;
+        display: block;
+        transition: color var(--transition);
       }
 
-      .mobile-header__toggle.is-open span:nth-child(2) {
-        opacity: 0;
+      .mobile-menu__sub:hover { color: var(--color-text); }
+
+      .mobile-menu__bottom {
+        margin-top: auto;
+        padding-top: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
 
-      .mobile-header__toggle.is-open span:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
+      .mobile-menu__social {
+        display: flex;
+        gap: 14px;
       }
 
-      /* Main */
+      .mobile-menu__social a {
+        color: var(--color-text);
+      }
+
+      .mobile-menu__copy {
+        font-size: 0.6875rem;
+        color: var(--color-text-muted);
+      }
+
+      /* ===== MAIN ===== */
       .main {
         margin-left: 200px;
         min-height: 100vh;
       }
 
-      /* Viewer */
+      /* ===== VIEWER (desktop single photo) ===== */
       .viewer {
         padding: 32px 40px 40px;
         min-height: 100vh;
@@ -469,38 +571,29 @@ const selectedPhotos = [
 
       .viewer__btn {
         font-size: 0.8125rem;
-        font-weight: 400;
         color: var(--color-text-muted);
         text-decoration: underline;
         text-underline-offset: 3px;
         transition: color var(--transition);
-        padding: 0;
       }
 
-      .viewer__btn:hover {
-        color: var(--color-text);
-      }
+      .viewer__btn:hover { color: var(--color-text); }
 
-      .viewer__sep {
-        font-size: 0.8125rem;
-        color: var(--color-text-muted);
-      }
-
+      .viewer__sep,
       .viewer__count {
         font-size: 0.8125rem;
         color: var(--color-text-muted);
-        margin-left: 8px;
       }
 
-      .viewer__grid-toggle {
+      .viewer__count { margin-left: 8px; }
+
+      .viewer__mode-toggle {
         color: var(--color-text-muted);
         transition: color var(--transition);
         padding: 4px;
       }
 
-      .viewer__grid-toggle:hover {
-        color: var(--color-text);
-      }
+      .viewer__mode-toggle:hover { color: var(--color-text); }
 
       .viewer__stage {
         flex: 1;
@@ -515,9 +608,7 @@ const selectedPhotos = [
         max-width: 900px;
       }
 
-      .viewer__slide.is-active {
-        display: block;
-      }
+      .viewer__slide.is-active { display: block; }
 
       .viewer__slide img {
         width: 100%;
@@ -530,20 +621,20 @@ const selectedPhotos = [
         margin-top: 20px;
         font-size: 0.8125rem;
         color: var(--color-text-muted);
-        letter-spacing: 0.02em;
+        font-style: italic;
       }
 
-      /* Grid view */
+      /* ===== GRID VIEW ===== */
       .grid-view {
         display: none;
         grid-template-columns: repeat(4, 1fr);
         gap: 8px;
-        padding: 0;
       }
 
       .grid-view.is-open {
         display: grid;
         flex: 1;
+        align-content: start;
       }
 
       .grid-view__item {
@@ -560,14 +651,32 @@ const selectedPhotos = [
         transition: transform 0.4s ease;
       }
 
-      .grid-view__item:hover img {
-        transform: scale(1.03);
+      .grid-view__item:hover img { transform: scale(1.03); }
+
+      /* ===== MOBILE FEED (scroll) ===== */
+      .mobile-feed {
+        display: none;
       }
 
-      /* Bio section */
+      .mobile-feed__item {
+        margin-bottom: 8px;
+      }
+
+      .mobile-feed__item img {
+        width: 100%;
+        height: auto;
+      }
+
+      .mobile-feed__item figcaption {
+        padding: 12px 0 24px;
+        font-size: 0.8125rem;
+        color: var(--color-text-muted);
+        font-style: italic;
+      }
+
+      /* ===== BIO ===== */
       .bio-section {
         padding: 32px 40px 80px;
-        min-height: 100vh;
       }
 
       .bio-section__content {
@@ -584,9 +693,7 @@ const selectedPhotos = [
         }
       }
 
-      .bio-section__text {
-        flex: 1;
-      }
+      .bio-section__text { flex: 1; }
 
       .bio-section__text p {
         font-size: 0.9375rem;
@@ -595,9 +702,7 @@ const selectedPhotos = [
         margin-bottom: 1rem;
       }
 
-      .bio-section__text p:last-child {
-        margin-bottom: 0;
-      }
+      .bio-section__text p:last-child { margin-bottom: 0; }
 
       .bio-section__image {
         flex-shrink: 0;
@@ -609,42 +714,34 @@ const selectedPhotos = [
         height: auto;
       }
 
-      /* Mobile responsive */
+      /* ===== MOBILE RESPONSIVE ===== */
       @media (max-width: 768px) {
-        .sidebar {
-          transform: translateX(-100%);
-          transition: transform 0.35s ease;
-          width: 260px;
-          padding-top: 72px;
-        }
+        .sidebar { display: none; }
 
-        .sidebar.is-open {
-          transform: translateX(0);
-        }
-
-        .mobile-header {
-          display: flex;
-        }
+        .mobile-header { display: flex; }
 
         .main {
           margin-left: 0;
-          padding-top: 56px;
+          padding-top: 80px;
         }
 
         .viewer {
-          padding: 20px 16px 32px;
+          padding: 0;
+          min-height: auto;
         }
 
-        .viewer__slide img {
-          max-height: 60vh;
-        }
+        .viewer__top { display: none; }
+        .viewer__stage { display: none !important; }
+        .viewer__caption { display: none !important; }
+        .grid-view { display: none !important; }
 
-        .grid-view {
-          grid-template-columns: repeat(2, 1fr);
+        .mobile-feed {
+          display: block;
+          padding: 0 20px;
         }
 
         .bio-section {
-          padding: 20px 16px 60px;
+          padding: 20px 20px 60px;
         }
 
         .bio-section__image {
