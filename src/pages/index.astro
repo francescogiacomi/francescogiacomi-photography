@@ -1,189 +1,474 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import '@fontsource/geist-sans/400.css';
+import '@fontsource/geist-sans/500.css';
+import '@fontsource/geist-sans/600.css';
+import '@fontsource/geist-sans/700.css';
+import '../styles/global.css';
+import SEO from '../components/SEO.astro';
 import { Image } from 'astro:assets';
-import CollectionCard from '../components/CollectionCard.astro';
 import { getCollection } from 'astro:content';
-import heroImage from '../assets/images/hero.jpg';
+import Lightbox from '../components/Lightbox.astro';
 
 const allCollections = await getCollection('collections');
-const latest = allCollections
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 6);
+const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
+
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/images/collections/**/*.{jpg,jpeg,png,webp}',
+  { eager: true }
+);
+
+function resolveImage(src: string): ImageMetadata {
+  const key = Object.keys(allImages).find((k) => k.includes(src));
+  if (!key) throw new Error(`Image not found: ${src}`);
+  return allImages[key].default;
+}
+
+const selectedMoments = [
+  { src: 'peru01/_PXP7086.jpg', title: 'Perù', year: 2024, width: 2048, height: 1365 },
+  { src: 'peru01/_PXP6623.jpg', title: 'Perù', year: 2024, width: 2048, height: 1365 },
+  { src: 'peru01/_PXP7308.jpg', title: 'Bolivia', year: 2024, width: 2048, height: 1365 },
+  { src: 'peru01/_PXP7632.jpg', title: 'Cile', year: 2024, width: 2048, height: 1365 },
+  { src: 'peru01/_PXP6798.jpg', title: 'Perù', year: 2024, width: 2048, height: 1365 },
+  { src: 'peru01/_PXP7145.jpg', title: 'Bolivia', year: 2024, width: 2048, height: 1160 },
+  { src: 'peru01/_PXP7095.jpg', title: 'Perù', year: 2024, width: 1932, height: 2048 },
+  { src: 'peru01/_PXP7360.jpg', title: 'Cile', year: 2024, width: 2048, height: 1365 },
+];
 ---
 
-<BaseLayout
-  title="Francesco Giacomi | Photography"
-  description="Landscape and travel photography by Francesco Giacomi."
-  transparentHeader={true}
->
-  <section class="hero">
-    <div class="hero__image">
-      <Image
-        src={heroImage}
-        alt="Landscape photography by Francesco Giacomi"
-        widths={[800, 1200, 1800, 2400]}
-        sizes="100vw"
-        loading="eager"
-      />
-    </div>
-    <a href="#intro" class="hero__scroll" aria-label="Scroll down">
-      <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="1 1 10 10 19 1"></polyline>
-      </svg>
-      <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="1 1 10 10 19 1"></polyline>
-      </svg>
-    </a>
-  </section>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <SEO
+      title="Francesco Giacomi | Photography"
+      description="Travel and documentary photography by Francesco Giacomi."
+    />
+  </head>
+  <body>
+    <main>
 
-  <section class="intro" id="intro">
-    <div class="container">
-      <p class="reveal">Fragments of humanity encountered along the way.<br/>Because sometimes, seeing doesn't mean understanding — but simply being present.</p>
-    </div>
-  </section>
+      <section class="hero">
+        <h1 class="hero__name">
+          <span>Francesco</span>
+          <span>Giacomi</span>
+        </h1>
+      </section>
 
-  <section class="latest">
-    <h2 class="latest__heading reveal">Latest Works</h2>
-    <div class="latest__grid">
-      {latest.map((entry, i) => (
-        <div class="reveal" style={`transition-delay: ${i * 0.1}s`}>
-          <CollectionCard
-            title={entry.data.title}
-            slug={entry.data.slug}
-            year={entry.data.year}
-            cover={entry.data.cover}
-          />
+      <section class="selected" id="selected">
+        <h2 class="section-title">Selected Moments</h2>
+        <div class="selected__grid" id="gallery">
+          {selectedMoments.map((photo) => {
+            const resolved = resolveImage(photo.src);
+            return (
+              <figure class="selected__item">
+                <a
+                  href={resolved.src}
+                  data-pswp-width={photo.width}
+                  data-pswp-height={photo.height}
+                  target="_blank"
+                >
+                  <Image
+                    src={resolved}
+                    alt={`${photo.title}, ${photo.year}`}
+                    widths={[400, 700, 1000]}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    loading="lazy"
+                  />
+                </a>
+                <figcaption>{photo.title}, {photo.year}</figcaption>
+              </figure>
+            );
+          })}
         </div>
-      ))}
-    </div>
-  </section>
-</BaseLayout>
+      </section>
 
-<script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
+      <section class="projects" id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="accordion">
+          {sorted.map((entry) => (
+            <div class="accordion__item">
+              <button class="accordion__header" aria-expanded="false">
+                <span class="accordion__title">{entry.data.title}</span>
+                <span class="accordion__meta">{entry.data.location} · {entry.data.year}</span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <line x1="0" y1="8" x2="16" y2="8" />
+                  <line class="accordion__icon-v" x1="8" y1="0" x2="8" y2="16" />
+                </svg>
+              </button>
+              <div class="accordion__body">
+                <p class="accordion__desc">{entry.data.description}</p>
+                <a href={`/collections/${entry.data.slug}`} class="accordion__link">View project →</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="bio" id="bio">
+        <h2 class="section-title">Bio</h2>
+        <div class="bio__content">
+          <div class="bio__text">
+            <p>L'India è stato il primo grande viaggio che ho intrapreso, e da lì è nato, quasi senza accorgermene, un piccolo progetto fotografico.</p>
+            <p>Sono partito con una Fuji X-T3 e un 35 mm, senza aspettative e senza una direzione precisa. La fotografia mi ha sempre accompagnato, ma allora non ero ancora in grado di comprendere davvero cosa avrei potuto vedere attraverso una lente.</p>
+            <p>Ogni viaggio è diventato un capitolo — frammenti di umanità incontrata lungo il cammino. Perché, a volte, vedere non significa capire, ma semplicemente essere presenti.</p>
+          </div>
+          <div class="bio__image">
+            <Image
+              src={import('../assets/images/about-portrait.jpg')}
+              alt="Francesco Giacomi"
+              widths={[400, 600]}
+              sizes="(max-width: 768px) 100vw, 40vw"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer" id="contact">
+        <div class="footer__links">
+          <a href="https://www.instagram.com/fncgcm/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://www.linkedin.com/in/francescogiacomi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+        <p class="footer__tagline">Fragments of humanity encountered along the way.</p>
+        <span class="footer__copy">&copy; 2026 Francesco Giacomi</span>
+      </footer>
+
+    </main>
+
+    <Lightbox />
+
+    <script>
+      // Accordion
+      document.querySelectorAll('.accordion__header').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const item = btn.parentElement!;
+          const isOpen = item.classList.contains('is-open');
+
+          document.querySelectorAll('.accordion__item.is-open').forEach((el) => {
+            el.classList.remove('is-open');
+            el.querySelector('.accordion__header')?.setAttribute('aria-expanded', 'false');
+          });
+
+          if (!isOpen) {
+            item.classList.add('is-open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      // Scroll reveal
+      const reveals = document.querySelectorAll('.section-title, .selected__item, .accordion__item, .bio__text, .bio__image, .footer__links, .footer__tagline');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      reveals.forEach((el) => {
+        el.classList.add('reveal');
+        observer.observe(el);
+      });
+
+      // Lazy image fade-in
+      document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
+        if ((img as HTMLImageElement).complete) {
+          img.classList.add('is-loaded');
+        } else {
+          img.addEventListener('load', () => img.classList.add('is-loaded'));
         }
       });
-    },
-    { threshold: 0.1 }
-  );
-  reveals.forEach((el) => observer.observe(el));
+    </script>
 
-  // Lazy image fade-in
-  document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
-    if ((img as HTMLImageElement).complete) {
-      img.classList.add('is-loaded');
-    } else {
-      img.addEventListener('load', () => img.classList.add('is-loaded'));
-    }
-  });
-</script>
+    <style>
+      body {
+        overflow-x: hidden;
+      }
 
-<style>
-  .hero {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    min-height: 600px;
-    overflow: hidden;
-  }
+      /* Hero */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--spacing-lg);
+      }
 
-  .hero__image {
-    position: absolute;
-    inset: 0;
-    animation: kenBurns 20s ease-in-out infinite alternate;
-  }
+      .hero__name {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: clamp(3.5rem, 12vw, 10rem);
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
 
-  .hero__image :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+      .hero__name span {
+        display: block;
+      }
 
-  @keyframes kenBurns {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.06); }
-  }
+      /* Section titles */
+      .section-title {
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--color-text-muted);
+        margin-bottom: var(--spacing-xl);
+        padding: 0 var(--spacing-lg);
+      }
 
-  .hero__scroll {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    opacity: 0.8;
-    transition: opacity var(--transition);
-  }
+      /* Selected Moments */
+      .selected {
+        padding: var(--spacing-2xl) 0;
+      }
 
-  .hero__scroll:hover {
-    opacity: 1;
-  }
+      .selected__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+        padding: 0 var(--spacing-lg);
+      }
 
-  .hero__scroll svg:first-child {
-    animation: scrollDown 2s ease-in-out infinite;
-  }
+      @media (min-width: 640px) {
+        .selected__grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
 
-  .hero__scroll svg:last-child {
-    animation: scrollDown 2s ease-in-out infinite 0.3s;
-  }
+      @media (min-width: 1024px) {
+        .selected__grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: var(--spacing-xl);
+        }
+      }
 
-  @keyframes scrollDown {
-    0% { opacity: 0; transform: translateY(-6px); }
-    50% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(6px); }
-  }
+      .selected__item {
+        overflow: hidden;
+      }
 
-  .intro {
-    padding: var(--spacing-2xl) 0 var(--spacing-xl);
-    text-align: center;
-  }
+      .selected__item a {
+        display: block;
+        overflow: hidden;
+      }
 
-  .intro p {
-    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
-    line-height: 1.7;
-    color: var(--color-text-muted);
-    max-width: 650px;
-    margin: 0 auto;
-  }
+      .selected__item :global(img) {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 2;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+      }
 
-  .latest {
-    padding: var(--spacing-xl) 32px var(--spacing-2xl);
-  }
+      .selected__item:hover :global(img) {
+        transform: scale(1.03);
+      }
 
-  .latest__heading {
-    font-size: 2rem;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    text-align: center;
-    margin-bottom: var(--spacing-xl);
-  }
+      .selected__item figcaption {
+        margin-top: 0.75rem;
+        font-size: 0.8125rem;
+        color: var(--color-text-muted);
+        letter-spacing: 0.02em;
+      }
 
-  .latest__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
-  }
+      /* Projects accordion */
+      .projects {
+        padding: var(--spacing-2xl) 0;
+        border-top: 1px solid var(--color-border);
+      }
 
-  @media (min-width: 640px) {
-    .latest__grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
+      .accordion {
+        padding: 0 var(--spacing-lg);
+      }
 
-  @media (min-width: 1024px) {
-    .latest__grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-</style>
+      .accordion__item {
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .accordion__header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: var(--spacing-lg) 0;
+        text-align: left;
+        gap: var(--spacing-md);
+      }
+
+      .accordion__title {
+        font-size: clamp(1.25rem, 3vw, 2rem);
+        font-weight: 500;
+        flex: 1;
+      }
+
+      .accordion__meta {
+        font-size: 0.8125rem;
+        color: var(--color-text-muted);
+        letter-spacing: 0.02em;
+        display: none;
+      }
+
+      @media (min-width: 640px) {
+        .accordion__meta {
+          display: block;
+        }
+      }
+
+      .accordion__icon {
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+      }
+
+      .accordion__icon-v {
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        transform-origin: center;
+      }
+
+      .accordion__item.is-open .accordion__icon-v {
+        opacity: 0;
+        transform: rotate(90deg);
+      }
+
+      .accordion__body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+        padding: 0 0;
+      }
+
+      .accordion__item.is-open .accordion__body {
+        max-height: 300px;
+        padding: 0 0 var(--spacing-lg);
+      }
+
+      .accordion__desc {
+        font-size: 0.9375rem;
+        line-height: 1.7;
+        color: var(--color-text-muted);
+        max-width: 600px;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .accordion__link {
+        font-size: 0.8125rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--color-text);
+        transition: opacity var(--transition);
+      }
+
+      .accordion__link:hover {
+        opacity: 0.6;
+      }
+
+      /* Bio */
+      .bio {
+        padding: var(--spacing-2xl) 0;
+        border-top: 1px solid var(--color-border);
+      }
+
+      .bio__content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xl);
+        padding: 0 var(--spacing-lg);
+      }
+
+      @media (min-width: 768px) {
+        .bio__content {
+          flex-direction: row;
+          align-items: flex-start;
+        }
+      }
+
+      .bio__text {
+        flex: 1;
+      }
+
+      .bio__text p {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: var(--color-text-muted);
+        margin-bottom: var(--spacing-md);
+      }
+
+      .bio__text p:last-child {
+        margin-bottom: 0;
+      }
+
+      .bio__image {
+        flex-shrink: 0;
+      }
+
+      @media (min-width: 768px) {
+        .bio__image {
+          width: 35%;
+        }
+      }
+
+      .bio__image :global(img) {
+        width: 100%;
+        height: auto;
+      }
+
+      /* Footer */
+      .footer {
+        padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-xl);
+        border-top: 1px solid var(--color-border);
+        text-align: center;
+      }
+
+      .footer__links {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-xl);
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .footer__links a {
+        font-size: 0.8125rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--color-text);
+        transition: opacity var(--transition);
+      }
+
+      .footer__links a:hover {
+        opacity: 0.6;
+      }
+
+      .footer__tagline {
+        font-size: 0.9375rem;
+        line-height: 1.7;
+        color: var(--color-text-muted);
+        max-width: 500px;
+        margin: 0 auto var(--spacing-xl);
+        font-style: italic;
+      }
+
+      .footer__copy {
+        font-size: 0.6875rem;
+        color: var(--color-text-muted);
+        letter-spacing: 0.05em;
+      }
+
+      /* Reveal animation stagger for grid items */
+      .selected__item.reveal {
+        transition-delay: calc(var(--i, 0) * 0.1s);
+      }
+
+      .accordion__item.reveal {
+        transition-delay: calc(var(--i, 0) * 0.08s);
+      }
+    </style>
+  </body>
+</html>
