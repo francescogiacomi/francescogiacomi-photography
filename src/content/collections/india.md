@@ -7,7 +7,7 @@ continent: "Asia"
 date: 2022-10-05
 description: "Chaos, colour, and faith — a world apart."
 cover: ../../assets/images/collections/india/India_FrancescoGiacomi-2.jpg
-order: 6
+order: 5
 forSale: false
 photos:
   - src: "india/India_FrancescoGiacomi-2.jpg"

@@ -2,12 +2,12 @@
 title: "Turchia"
 slug: "turkey"
 location: "Turchia"
-year: 2024
+year: 2021
 continent: "Asia"
-date: 2024-08-10
+date: 2021-08-10
 description: "Tra Cappadocia e Istanbul — un paese sospeso tra Oriente e Occidente."
 cover: ../../assets/images/collections/turkey/cover.jpg
-order: 1
+order: 6
 forSale: false
 photos:
   - src: "turkey/01.jpg"

@@ -7,7 +7,7 @@ continent: "Americhe"
 date: 2024-03-15
 description: "Dalle montagne colorate del Perù al Salar de Uyuni, fino al deserto di Atacama."
 cover: ../../assets/images/collections/peru01/_PXP7086.jpg
-order: 3
+order: 4
 forSale: false
 photos:
   - src: "peru01/_PXP6383.jpg"

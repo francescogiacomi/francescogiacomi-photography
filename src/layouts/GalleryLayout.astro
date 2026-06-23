@@ -43,6 +43,7 @@ const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
           <div class="nav-group">
             <span class="nav-label">Projects</span>
             <div class="nav-sub">
+              <span class="nav-sub__link is-coming">Vietnam (2026) — Coming</span>
               {sorted.map((entry) => (
                 <a
                   href={`/collections/${entry.data.slug}`}
@@ -89,6 +90,7 @@ const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
           <a href="/" class={`mobile-menu__link ${activeNav === 'selected' ? 'is-active' : ''}`}>Selected Moments</a>
           <div class="mobile-menu__group">
             <span class="mobile-menu__label">Projects</span>
+            <span class="mobile-menu__sub is-coming">Vietnam (2026) — Coming</span>
             {sorted.map((entry) => (
               <a
                 href={`/collections/${entry.data.slug}`}
@@ -211,6 +213,13 @@ const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
 
       .nav-sub__link:hover { color: var(--color-text); }
       .nav-sub__link.is-active { color: var(--color-accent); }
+
+      .nav-sub__link.is-coming {
+        opacity: 0.5;
+        cursor: default;
+        font-style: italic;
+      }
+      .nav-sub__link.is-coming:hover { color: var(--color-text-muted); }
 
       .sidebar__bottom {
         display: flex;
@@ -346,6 +355,11 @@ const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
 
       .mobile-menu__sub:hover { color: var(--color-text); }
       .mobile-menu__sub.is-active { color: var(--color-accent); }
+
+      .mobile-menu__sub.is-coming {
+        opacity: 0.5;
+        font-style: italic;
+      }
 
       .mobile-menu__bottom {
         margin-top: auto;

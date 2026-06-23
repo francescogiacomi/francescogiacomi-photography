@@ -2,12 +2,12 @@
 title: "Cina"
 slug: "china"
 location: "Cina"
-year: 2023
+year: 2025
 continent: "Asia"
-date: 2023-05-20
+date: 2025-05-20
 description: "Templi antichi, megalopoli futuristiche e paesaggi senza tempo."
 cover: ../../assets/images/collections/china/cover.jpg
-order: 4
+order: 3
 forSale: false
 photos:
   - src: "china/01.jpg"
