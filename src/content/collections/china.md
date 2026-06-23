@@ -37,4 +37,6 @@ photos:
     layout: full
 ---
 
-La Cina è un paese che non finisce mai. Dalla Grande Muraglia alle risaie dello Yunnan, dalle luci di Shanghai ai templi silenziosi di Pechino. Tre settimane che hanno coperto appena una frazione di quello che c'è da vedere.
+China overwhelmed me before I could understand it. A country so immense it makes you feel small — lost between millennia of history and a future rushing forward without waiting for anyone. I felt like a single drop in an ocean of faces, yet never invisible.
+
+What stayed with me wasn't the scale, but the quiet: a glance, a gesture, a moment of calm in the middle of the chaos. Those instants reminded me that even in the largest of countries, what moves us is always something small and human.
