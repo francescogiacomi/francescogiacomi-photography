@@ -10,30 +10,110 @@ cover: ../../assets/images/collections/peru01/_PXP7086.jpg
 order: 3
 forSale: false
 photos:
-  - src: "peru01/01.jpg"
-    alt: "Rainbow Mountain al mattino"
-    width: 2400
-    height: 1600
+  - src: "peru01/_PXP7077.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
     layout: full
-  - src: "peru01/02.jpg"
-    alt: "Venditrice di caffè sulla montagna"
-    width: 1800
-    height: 1200
-    layout: half
-  - src: "peru01/03.jpg"
-    alt: "Salar de Uyuni — specchio d'acqua"
-    width: 1800
-    height: 1200
-    layout: half
-  - src: "peru01/04.jpg"
-    alt: "Valle della Luna, Atacama"
-    width: 2400
-    height: 1600
+  - src: "peru01/_PXP7086.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
     layout: full
-  - src: "peru01/05.jpg"
-    alt: "Cusco al tramonto"
-    width: 2400
-    height: 1600
+  - src: "peru01/_PXP7090.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7095.jpg"
+    alt: ""
+    width: 1932
+    height: 2048
+    layout: full
+  - src: "peru01/_PXP7105.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7145.jpg"
+    alt: ""
+    width: 2048
+    height: 1160
+    layout: full
+  - src: "peru01/_PXP7157.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7159.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7189.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7220.jpg"
+    alt: ""
+    width: 2048
+    height: 1578
+    layout: full
+  - src: "peru01/_PXP7308.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7316.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7339.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7360.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7376.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7488.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7632.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7866.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7995.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP8005.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP8218.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
     layout: full
 ---
 
