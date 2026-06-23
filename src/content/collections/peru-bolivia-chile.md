@@ -10,6 +10,116 @@ cover: ../../assets/images/collections/peru01/_PXP7086.jpg
 order: 3
 forSale: false
 photos:
+  - src: "peru01/_PXP6383.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6402.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6428.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6437.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6445.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6623.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6654.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6667.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6672.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6768.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6783.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6798.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6810.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6814.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6851.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP6962.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7047.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7050.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7055.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7063.jpg"
+    alt: ""
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "peru01/_PXP7066.jpg"
+    alt: ""
+    width: 1995
+    height: 2048
+    layout: full
+  - src: "peru01/_PXP7073.jpg"
+    alt: ""
+    width: 2048
+    height: 1414
+    layout: full
   - src: "peru01/_PXP7077.jpg"
     alt: ""
     width: 2048
