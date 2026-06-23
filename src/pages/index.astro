@@ -74,10 +74,10 @@ const selectedPhotos = [
       <div class="sidebar__bottom">
         <div class="sidebar__social">
           <a href="https://www.instagram.com/fncgcm/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.336 3.608 1.311.975.975 1.249 2.242 1.311 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.336 2.633-1.311 3.608-.975.975-2.242 1.249-3.608 1.311-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.336-3.608-1.311-.975-.975-1.249-2.242-1.311-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.336-2.633 1.311-3.608.975-.975 2.242-1.249 3.608-1.311 1.266-.058 1.646-.07 4.85-.07zm0 1.802c-3.15 0-3.523.012-4.766.069-.93.042-1.518.196-1.943.363-.42.163-.872.42-1.255.803-.383.383-.64.835-.803 1.255-.167.425-.321 1.013-.363 1.943-.057 1.243-.069 1.616-.069 4.766s.012 3.523.069 4.766c.042.93.196 1.518.363 1.943.163.42.42.872.803 1.255.383.383.835.64 1.255.803.425.167 1.013.321 1.943.363 1.243.057 1.616.069 4.766.069s3.523-.012 4.766-.069c.93-.042 1.518-.196 1.943-.363.42-.163.872-.42 1.255-.803.383-.383.64-.835.803-1.255.167-.425.321-1.013.363-1.943.057-1.243.069-1.616.069-4.766s-.012-3.523-.069-4.766c-.042-.93-.196-1.518-.363-1.943-.163-.42-.42-.872-.803-1.255-.383-.383-.835-.64-1.255-.803-.425-.167-1.013-.321-1.943-.363-1.243-.057-1.616-.069-4.766-.069zm0 3.064a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm6.538-3.31a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z"/></svg>
           </a>
           <a href="https://www.linkedin.com/in/francescogiacomi/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
           </a>
         </div>
         <span class="sidebar__copy">&copy; All rights reserved</span>
@@ -96,6 +96,7 @@ const selectedPhotos = [
     </header>
 
     <!-- Mobile menu overlay -->
+    <div class="mobile-menu-backdrop" id="menu-backdrop"></div>
     <div class="mobile-menu" id="mobile-menu">
       <div class="mobile-menu__inner">
         <button class="mobile-menu__close" id="menu-close" aria-label="Close">
@@ -114,10 +115,10 @@ const selectedPhotos = [
         <div class="mobile-menu__bottom">
           <div class="mobile-menu__social">
             <a href="https://www.instagram.com/fncgcm/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.336 3.608 1.311.975.975 1.249 2.242 1.311 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.336 2.633-1.311 3.608-.975.975-2.242 1.249-3.608 1.311-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.336-3.608-1.311-.975-.975-1.249-2.242-1.311-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.336-2.633 1.311-3.608.975-.975 2.242-1.249 3.608-1.311 1.266-.058 1.646-.07 4.85-.07zm0 1.802c-3.15 0-3.523.012-4.766.069-.93.042-1.518.196-1.943.363-.42.163-.872.42-1.255.803-.383.383-.64.835-.803 1.255-.167.425-.321 1.013-.363 1.943-.057 1.243-.069 1.616-.069 4.766s.012 3.523.069 4.766c.042.93.196 1.518.363 1.943.163.42.42.872.803 1.255.383.383.835.64 1.255.803.425.167 1.013.321 1.943.363 1.243.057 1.616.069 4.766.069s3.523-.012 4.766-.069c.93-.042 1.518-.196 1.943-.363.42-.163.872-.42 1.255-.803.383-.383.64-.835.803-1.255.167-.425.321-1.013.363-1.943.057-1.243.069-1.616.069-4.766s-.012-3.523-.069-4.766c-.042-.93-.196-1.518-.363-1.943-.163-.42-.42-.872-.803-1.255-.383-.383-.835-.64-1.255-.803-.425-.167-1.013-.321-1.943-.363-1.243-.057-1.616-.069-4.766-.069zm0 3.064a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm6.538-3.31a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z"/></svg>
             </a>
             <a href="https://www.linkedin.com/in/francescogiacomi/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
             </a>
           </div>
           <span class="mobile-menu__copy">&copy; All rights reserved</span>
@@ -258,6 +259,11 @@ const selectedPhotos = [
         goTo(current < total - 1 ? current + 1 : 0);
       });
 
+      // Click the photo to advance to the next one
+      viewerStage.addEventListener('click', () => {
+        if (!gridOpen) goTo(current < total - 1 ? current + 1 : 0);
+      });
+
       document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') goTo(current > 0 ? current - 1 : total - 1);
         if (e.key === 'ArrowRight') goTo(current < total - 1 ? current + 1 : 0);
@@ -303,21 +309,29 @@ const selectedPhotos = [
           document.getElementById('section-bio').style.display = section === 'bio' ? '' : 'none';
 
           // Close mobile menu
-          document.getElementById('mobile-menu').classList.remove('is-open');
-          document.body.style.overflow = '';
+          closeMenu();
         });
       });
 
       // Mobile menu
-      document.getElementById('menu-toggle').addEventListener('click', () => {
-        document.getElementById('mobile-menu').classList.add('is-open');
-        document.body.style.overflow = 'hidden';
-      });
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuBackdrop = document.getElementById('menu-backdrop');
 
-      document.getElementById('menu-close').addEventListener('click', () => {
-        document.getElementById('mobile-menu').classList.remove('is-open');
+      function openMenu() {
+        mobileMenu.classList.add('is-open');
+        menuBackdrop.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        mobileMenu.classList.remove('is-open');
+        menuBackdrop.classList.remove('is-open');
         document.body.style.overflow = '';
-      });
+      }
+
+      document.getElementById('menu-toggle').addEventListener('click', openMenu);
+      document.getElementById('menu-close').addEventListener('click', closeMenu);
+      menuBackdrop.addEventListener('click', closeMenu);
 
       // Lazy image fade-in
       document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
@@ -414,11 +428,11 @@ const selectedPhotos = [
       }
 
       .sidebar__social a {
-        color: var(--color-text);
+        color: var(--color-text-muted);
         transition: opacity var(--transition);
       }
 
-      .sidebar__social a:hover { opacity: 0.5; }
+      .sidebar__social a:hover { opacity: 0.6; }
 
       .sidebar__copy {
         font-size: 0.6875rem;
@@ -452,6 +466,22 @@ const selectedPhotos = [
       }
 
       /* ===== MOBILE MENU OVERLAY ===== */
+      .mobile-menu-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 190;
+        background: rgba(0, 0, 0, 0.35);
+        opacity: 0;
+        transition: opacity 0.35s ease;
+        pointer-events: none;
+      }
+
+      .mobile-menu-backdrop.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
       .mobile-menu {
         position: fixed;
         top: 0; right: 0;
@@ -460,7 +490,7 @@ const selectedPhotos = [
         height: 100vh;
         z-index: 200;
         background: var(--color-bg);
-        border-left: 1px solid var(--color-border);
+        box-shadow: -16px 0 40px rgba(0, 0, 0, 0.18);
         transform: translateX(100%);
         transition: transform 0.35s ease;
         overflow-y: auto;
@@ -534,7 +564,7 @@ const selectedPhotos = [
       }
 
       .mobile-menu__social a {
-        color: var(--color-text);
+        color: var(--color-text-muted);
       }
 
       .mobile-menu__copy {
@@ -550,7 +580,7 @@ const selectedPhotos = [
 
       /* ===== VIEWER (desktop single photo) ===== */
       .viewer {
-        padding: 32px 40px 40px;
+        padding: 40px 64px 56px;
         min-height: 100vh;
         display: flex;
         flex-direction: column;
@@ -591,6 +621,7 @@ const selectedPhotos = [
         color: var(--color-text-muted);
         transition: color var(--transition);
         padding: 4px;
+        margin-left: auto;
       }
 
       .viewer__mode-toggle:hover { color: var(--color-text); }
@@ -719,6 +750,8 @@ const selectedPhotos = [
         .sidebar { display: none; }
 
         .mobile-header { display: flex; }
+
+        .mobile-menu-backdrop { display: block; }
 
         .main {
           margin-left: 0;
