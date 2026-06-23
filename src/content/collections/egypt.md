@@ -252,4 +252,6 @@ photos:
     layout: full
 ---
 
-L'Egitto è un posto dove il tempo funziona diversamente. Le piramidi sono lì da millenni e il Nilo scorre come sempre. Due settimane tra Il Cairo, Luxor e il deserto occidentale — un viaggio che ti lascia la sabbia nelle scarpe e la storia in testa.
+Egypt made me feel the weight of time like nowhere else. Standing before something built thousands of years ago, I felt impossibly small — a brief passage in a story far older than me. There's a strange peace in that smallness, in realizing you're only a guest in a place that has seen everything.
+
+But what stayed with me wasn't the stone, it was the life around it: the noise of the markets, the light on the Nile at dusk, the eyes of people who carry that immense history without even noticing. That's where I felt Egypt — not in its monuments, but in its present.
