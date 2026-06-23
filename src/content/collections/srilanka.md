@@ -6,10 +6,15 @@ year: 2025
 continent: "Asia"
 date: 2025-07-20
 description: "Templi dorati, piantagioni di tè e coste infinite — l'isola che non ti aspetti."
-cover: ../../assets/images/collections/srilanka/Sri Lanka_FrancescoGiacomi-2.jpg
+cover: ../../assets/images/collections/srilanka/Sri Lanka_FrancescoGiacomi.jpg
 order: 1
 forSale: false
 photos:
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
   - src: "srilanka/Sri Lanka_FrancescoGiacomi-2.jpg"
     alt: "Sri Lanka, 2025"
     width: 1365
@@ -129,6 +134,101 @@ photos:
     alt: "Sri Lanka, 2025"
     width: 1365
     height: 2048
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-28.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-29.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-30.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-31.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-32.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-33.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-34.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 1365
+    height: 2048
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-35.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-36.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-37.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-38.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-39.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-40.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-41.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-42.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-43.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-44.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-45.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "srilanka/Sri Lanka_FrancescoGiacomi-46.jpg"
+    alt: "Sri Lanka, 2025"
+    width: 2048
+    height: 1365
     layout: full
 ---
 
