@@ -5,35 +5,110 @@ location: "India"
 year: 2022
 continent: "Asia"
 date: 2022-10-05
-description: "Colori, caos e spiritualità — un viaggio che travolge tutti i sensi."
-cover: ../../assets/images/collections/india/cover.jpg
+description: "Chaos, colour, and faith — a world apart."
+cover: ../../assets/images/collections/india01/India_FrancescoGiacomi-2.jpg
 order: 6
 forSale: false
 photos:
-  - src: "india/01.jpg"
-    alt: "Taj Mahal all'alba"
-    width: 2400
-    height: 1600
+  - src: "india01/India_FrancescoGiacomi-2.jpg"
+    alt: "India, 2022"
+    width: 1319
+    height: 2048
     layout: full
-  - src: "india/02.jpg"
-    alt: "Ghat di Varanasi al mattino"
-    width: 1800
-    height: 1200
-    layout: half
-  - src: "india/03.jpg"
-    alt: "Hawa Mahal a Jaipur"
-    width: 1800
-    height: 1200
-    layout: half
-  - src: "india/04.jpg"
-    alt: "Risaie del Kerala"
-    width: 2400
-    height: 1600
+  - src: "india01/India_FrancescoGiacomi-3.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
     layout: full
-  - src: "india/05.jpg"
-    alt: "Deserto del Thar al tramonto"
-    width: 2400
-    height: 1600
+  - src: "india01/India_FrancescoGiacomi-5.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-6.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-7.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-8.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-9.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-11.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-12.jpg"
+    alt: "India, 2022"
+    width: 1396
+    height: 2048
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-14.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-15.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-16.jpg"
+    alt: "India, 2022"
+    width: 1365
+    height: 2048
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-17.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-18.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-19.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-20.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-22.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-23.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-24.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
+    layout: full
+  - src: "india01/India_FrancescoGiacomi-25.jpg"
+    alt: "India, 2022"
+    width: 2048
+    height: 1365
     layout: full
 ---
 
