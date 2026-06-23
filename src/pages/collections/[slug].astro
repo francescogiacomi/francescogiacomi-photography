@@ -1,216 +1,32 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { Image } from 'astro:assets';
-import PhotoGrid from '../../components/PhotoGrid.astro';
-import Lightbox from '../../components/Lightbox.astro';
-import CollectionNav from '../../components/CollectionNav.astro';
-import { getCollection, render } from 'astro:content';
+import GalleryLayout from '../../layouts/GalleryLayout.astro';
+import PhotoViewer from '../../components/PhotoViewer.astro';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const allCollections = await getCollection('collections');
   const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
 
-  return sorted.map((entry, index) => {
-    const prev = index > 0 ? sorted[index - 1] : undefined;
-    const next = index < sorted.length - 1 ? sorted[index + 1] : undefined;
-    return {
-      params: { slug: entry.data.slug },
-      props: {
-        entry,
-        prev: prev ? { slug: prev.data.slug, title: prev.data.title } : undefined,
-        next: next ? { slug: next.data.slug, title: next.data.title } : undefined,
-      },
-    };
-  });
+  return sorted.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
 }
 
-const { entry, prev, next } = Astro.props;
-const { Content } = await render(entry);
+const { entry } = Astro.props;
+
+const photos = entry.data.photos.map((p) => ({
+  src: p.src,
+  caption: p.alt && p.alt.length > 0 ? p.alt : `${entry.data.location}, ${entry.data.year}`,
+}));
+
+const info = entry.body ?? entry.data.description;
 ---
 
-<BaseLayout
+<GalleryLayout
   title={`${entry.data.title} | Francesco Giacomi`}
   description={entry.data.description}
-  transparentHeader={true}
+  activeNav={entry.data.slug}
 >
-  <article class="collection-page">
-    <section class="collection-hero">
-      <div class="collection-hero__image">
-        <Image
-          src={entry.data.cover}
-          alt={entry.data.title}
-          widths={[800, 1200, 1800, 2400]}
-          sizes="100vw"
-          loading="eager"
-        />
-      </div>
-      <div class="collection-hero__overlay">
-        <h1 class="collection-hero__title">{entry.data.title}</h1>
-        <span class="collection-hero__meta">{entry.data.location} · {entry.data.year}</span>
-      </div>
-    </section>
-
-    <section class="collection-story reveal">
-      <div class="collection-story__inner">
-        <div class="collection-story__left">
-          <h2 class="collection-story__title">{entry.data.title}</h2>
-          <span class="collection-story__meta">{entry.data.location} · {entry.data.year}</span>
-        </div>
-        <div class="collection-story__right">
-          <Content />
-        </div>
-      </div>
-    </section>
-
-    <section class="collection-gallery">
-      <PhotoGrid photos={entry.data.photos} />
-    </section>
-
-    <Lightbox />
-    <CollectionNav prev={prev} next={next} />
-  </article>
-</BaseLayout>
-
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-  reveals.forEach((el) => observer.observe(el));
-
-  document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
-    if ((img as HTMLImageElement).complete) {
-      img.classList.add('is-loaded');
-    } else {
-      img.addEventListener('load', () => img.classList.add('is-loaded'));
-    }
-  });
-</script>
-
-<style>
-  .collection-hero {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    min-height: 600px;
-    overflow: hidden;
-  }
-
-  .collection-hero__image {
-    position: absolute;
-    inset: 0;
-    animation: kenBurns 20s ease-in-out infinite alternate;
-  }
-
-  .collection-hero__image :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  @keyframes kenBurns {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.06); }
-  }
-
-  .collection-hero__overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.25);
-  }
-
-  .collection-hero__title {
-    color: #fff;
-    font-size: clamp(2.5rem, 7vw, 5rem);
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    text-align: center;
-  }
-
-  .collection-hero__meta {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: var(--spacing-sm);
-  }
-
-  .collection-story {
-    padding: var(--spacing-2xl) 32px;
-  }
-
-  .collection-story__inner {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-    max-width: var(--max-width);
-    margin: 0 auto;
-  }
-
-  @media (min-width: 768px) {
-    .collection-story__inner {
-      flex-direction: row;
-      gap: var(--spacing-xl);
-    }
-  }
-
-  .collection-story__left {
-    flex-shrink: 0;
-  }
-
-  @media (min-width: 768px) {
-    .collection-story__left {
-      width: 35%;
-    }
-  }
-
-  .collection-story__title {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-
-  .collection-story__meta {
-    display: block;
-    margin-top: var(--spacing-sm);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-  }
-
-  .collection-story__right {
-    flex: 1;
-    font-size: 1.0625rem;
-    line-height: 1.9;
-    color: var(--color-text-muted);
-  }
-
-  .collection-story__right :global(p) {
-    margin-bottom: var(--spacing-md);
-  }
-
-  .collection-story__right :global(p:last-child) {
-    margin-bottom: 0;
-  }
-
-  .collection-gallery {
-    padding-bottom: var(--spacing-xl);
-  }
-</style>
+  <PhotoViewer photos={photos} info={info} />
+</GalleryLayout>
