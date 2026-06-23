@@ -54,10 +54,8 @@ function resolveImage(src: string): ImageMetadata {
   .photo-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 4px;
-    padding: 0 32px;
-    max-width: var(--max-width);
-    margin: 0 auto;
+    gap: 3px;
+    padding: 0 16px;
   }
 
   @media (min-width: 640px) {
@@ -74,7 +72,7 @@ function resolveImage(src: string): ImageMetadata {
 
   .photo-grid__item {
     display: block;
-    aspect-ratio: 1;
+    aspect-ratio: 3 / 2;
     overflow: hidden;
     background: var(--color-bg-raised);
   }
