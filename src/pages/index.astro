@@ -7,7 +7,6 @@ import '../styles/global.css';
 import SEO from '../components/SEO.astro';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import Lightbox from '../components/Lightbox.astro';
 
 const allCollections = await getCollection('collections');
 const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
@@ -23,15 +22,19 @@ function resolveImage(src: string): ImageMetadata {
   return allImages[key].default;
 }
 
-const selectedMoments = [
-  { src: 'peru01/_PXP7086.jpg', title: 'Perù', year: 2024, width: 2048, height: 1365 },
-  { src: 'peru01/_PXP6623.jpg', title: 'Perù', year: 2024, width: 2048, height: 1365 },
-  { src: 'peru01/_PXP7308.jpg', title: 'Bolivia', year: 2024, width: 2048, height: 1365 },
-  { src: 'peru01/_PXP7632.jpg', title: 'Cile', year: 2024, width: 2048, height: 1365 },
-  { src: 'peru01/_PXP6798.jpg', title: 'Perù', year: 2024, width: 2048, height: 1365 },
-  { src: 'peru01/_PXP7145.jpg', title: 'Bolivia', year: 2024, width: 2048, height: 1160 },
-  { src: 'peru01/_PXP7095.jpg', title: 'Perù', year: 2024, width: 1932, height: 2048 },
-  { src: 'peru01/_PXP7360.jpg', title: 'Cile', year: 2024, width: 2048, height: 1365 },
+const selectedPhotos = [
+  { src: 'peru01/_PXP7086.jpg', caption: 'Perù, 2024' },
+  { src: 'peru01/_PXP6623.jpg', caption: 'Perù, 2024' },
+  { src: 'peru01/_PXP6798.jpg', caption: 'Perù, 2024' },
+  { src: 'peru01/_PXP7308.jpg', caption: 'Bolivia, 2024' },
+  { src: 'peru01/_PXP7095.jpg', caption: 'Perù, 2024' },
+  { src: 'peru01/_PXP7632.jpg', caption: 'Cile, 2024' },
+  { src: 'peru01/_PXP7145.jpg', caption: 'Bolivia, 2024' },
+  { src: 'peru01/_PXP7360.jpg', caption: 'Cile, 2024' },
+  { src: 'peru01/_PXP6437.jpg', caption: 'Perù, 2024' },
+  { src: 'peru01/_PXP7159.jpg', caption: 'Perù, 2024' },
+  { src: 'peru01/_PXP6768.jpg', caption: 'Perù, 2024' },
+  { src: 'peru01/_PXP7866.jpg', caption: 'Perù, 2024' },
 ];
 ---
 
@@ -47,138 +50,229 @@ const selectedMoments = [
     />
   </head>
   <body>
-    <main>
 
-      <section class="hero">
-        <h1 class="hero__name">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__top">
+        <a href="/" class="sidebar__name">
           <span>Francesco</span>
           <span>Giacomi</span>
-        </h1>
-      </section>
+        </a>
 
-      <section class="selected" id="selected">
-        <h2 class="section-title">Selected Moments</h2>
-        <div class="selected__grid" id="gallery">
-          {selectedMoments.map((photo) => {
+        <nav class="sidebar__nav">
+          <a href="#" class="nav-link is-active" data-section="selected">Selected Moments</a>
+          <div class="nav-group">
+            <button class="nav-link nav-link--parent" data-toggle="projects">Projects <span class="nav-arrow">▸</span></button>
+            <div class="nav-sub" id="nav-projects">
+              {sorted.map((entry) => (
+                <a href={`/collections/${entry.data.slug}`} class="nav-sub__link">{entry.data.title}</a>
+              ))}
+            </div>
+          </div>
+          <a href="#" class="nav-link" data-section="bio">Bio</a>
+        </nav>
+      </div>
+
+      <div class="sidebar__bottom">
+        <div class="sidebar__social">
+          <a href="https://www.instagram.com/fncgcm/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/francescogiacomi/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+        <span class="sidebar__copy">&copy; All rights reserved</span>
+      </div>
+    </aside>
+
+    <!-- Mobile header -->
+    <header class="mobile-header" id="mobile-header">
+      <a href="/" class="mobile-header__name">Francesco Giacomi</a>
+      <button class="mobile-header__toggle" id="menu-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <!-- Main content -->
+    <main class="main">
+
+      <!-- Selected Moments: single photo viewer -->
+      <section class="viewer" id="section-selected">
+        <div class="viewer__top">
+          <div class="viewer__nav">
+            <button class="viewer__btn" id="btn-prev">Previous</button>
+            <span class="viewer__sep">/</span>
+            <button class="viewer__btn" id="btn-next">Next</button>
+            <span class="viewer__count" id="viewer-count">(1 of {selectedPhotos.length})</span>
+          </div>
+          <button class="viewer__grid-toggle" id="btn-grid" aria-label="Grid view">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+              <rect x="0" y="0" width="4" height="4" rx="0.5"/>
+              <rect x="7" y="0" width="4" height="4" rx="0.5"/>
+              <rect x="14" y="0" width="4" height="4" rx="0.5"/>
+              <rect x="0" y="7" width="4" height="4" rx="0.5"/>
+              <rect x="7" y="7" width="4" height="4" rx="0.5"/>
+              <rect x="14" y="7" width="4" height="4" rx="0.5"/>
+              <rect x="0" y="14" width="4" height="4" rx="0.5"/>
+              <rect x="7" y="14" width="4" height="4" rx="0.5"/>
+              <rect x="14" y="14" width="4" height="4" rx="0.5"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="viewer__stage" id="viewer-stage">
+          {selectedPhotos.map((photo, i) => {
             const resolved = resolveImage(photo.src);
             return (
-              <figure class="selected__item">
-                <a
-                  href={resolved.src}
-                  data-pswp-width={photo.width}
-                  data-pswp-height={photo.height}
-                  target="_blank"
-                >
-                  <Image
-                    src={resolved}
-                    alt={`${photo.title}, ${photo.year}`}
-                    widths={[400, 700, 1000]}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    loading="lazy"
-                  />
-                </a>
-                <figcaption>{photo.title}, {photo.year}</figcaption>
-              </figure>
+              <div class={`viewer__slide ${i === 0 ? 'is-active' : ''}`} data-index={i}>
+                <Image
+                  src={resolved}
+                  alt={photo.caption}
+                  widths={[800, 1200, 1800]}
+                  sizes="(max-width: 768px) 100vw, 70vw"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        <p class="viewer__caption" id="viewer-caption">{selectedPhotos[0].caption}</p>
+
+        <!-- Grid view -->
+        <div class="grid-view" id="grid-view">
+          {selectedPhotos.map((photo, i) => {
+            const resolved = resolveImage(photo.src);
+            return (
+              <button class="grid-view__item" data-goto={i}>
+                <Image
+                  src={resolved}
+                  alt={photo.caption}
+                  widths={[200, 350]}
+                  sizes="20vw"
+                  loading="lazy"
+                />
+              </button>
             );
           })}
         </div>
       </section>
 
-      <section class="projects" id="projects">
-        <h2 class="section-title">Projects</h2>
-        <div class="accordion">
-          {sorted.map((entry) => (
-            <div class="accordion__item">
-              <button class="accordion__header" aria-expanded="false">
-                <span class="accordion__title">{entry.data.title}</span>
-                <span class="accordion__meta">{entry.data.location} · {entry.data.year}</span>
-                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <line x1="0" y1="8" x2="16" y2="8" />
-                  <line class="accordion__icon-v" x1="8" y1="0" x2="8" y2="16" />
-                </svg>
-              </button>
-              <div class="accordion__body">
-                <p class="accordion__desc">{entry.data.description}</p>
-                <a href={`/collections/${entry.data.slug}`} class="accordion__link">View project →</a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section class="bio" id="bio">
-        <h2 class="section-title">Bio</h2>
-        <div class="bio__content">
-          <div class="bio__text">
+      <!-- Bio section -->
+      <section class="bio-section" id="section-bio" style="display:none;">
+        <div class="bio-section__content">
+          <div class="bio-section__text">
             <p>L'India è stato il primo grande viaggio che ho intrapreso, e da lì è nato, quasi senza accorgermene, un piccolo progetto fotografico.</p>
             <p>Sono partito con una Fuji X-T3 e un 35 mm, senza aspettative e senza una direzione precisa. La fotografia mi ha sempre accompagnato, ma allora non ero ancora in grado di comprendere davvero cosa avrei potuto vedere attraverso una lente.</p>
             <p>Ogni viaggio è diventato un capitolo — frammenti di umanità incontrata lungo il cammino. Perché, a volte, vedere non significa capire, ma semplicemente essere presenti.</p>
           </div>
-          <div class="bio__image">
+          <div class="bio-section__image">
             <Image
               src={import('../assets/images/about-portrait.jpg')}
               alt="Francesco Giacomi"
               widths={[400, 600]}
-              sizes="(max-width: 768px) 100vw, 40vw"
+              sizes="(max-width: 768px) 100vw, 50vw"
               loading="lazy"
             />
           </div>
         </div>
       </section>
 
-      <footer class="footer" id="contact">
-        <div class="footer__links">
-          <a href="https://www.instagram.com/fncgcm/" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href="https://www.linkedin.com/in/francescogiacomi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        </div>
-        <p class="footer__tagline">Fragments of humanity encountered along the way.</p>
-        <span class="footer__copy">&copy; 2026 Francesco Giacomi</span>
-      </footer>
-
     </main>
 
-    <Lightbox />
+    <script is:inline define:vars={{ captions: selectedPhotos.map(p => p.caption), total: selectedPhotos.length }}>
+      let current = 0;
+      let gridOpen = false;
 
-    <script>
-      // Accordion
-      document.querySelectorAll('.accordion__header').forEach((btn) => {
+      const slides = document.querySelectorAll('.viewer__slide');
+      const captionEl = document.getElementById('viewer-caption');
+      const countEl = document.getElementById('viewer-count');
+      const gridView = document.getElementById('grid-view');
+      const viewerStage = document.getElementById('viewer-stage');
+      const viewerTop = document.querySelector('.viewer__top');
+
+      function goTo(index) {
+        slides.forEach(s => s.classList.remove('is-active'));
+        slides[index].classList.add('is-active');
+        captionEl.textContent = captions[index];
+        countEl.textContent = `(${index + 1} of ${total})`;
+        current = index;
+      }
+
+      document.getElementById('btn-prev').addEventListener('click', () => {
+        goTo(current > 0 ? current - 1 : total - 1);
+      });
+
+      document.getElementById('btn-next').addEventListener('click', () => {
+        goTo(current < total - 1 ? current + 1 : 0);
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') goTo(current > 0 ? current - 1 : total - 1);
+        if (e.key === 'ArrowRight') goTo(current < total - 1 ? current + 1 : 0);
+        if (e.key === 'Escape' && gridOpen) toggleGrid();
+      });
+
+      // Grid toggle
+      function toggleGrid() {
+        gridOpen = !gridOpen;
+        gridView.classList.toggle('is-open', gridOpen);
+        viewerStage.style.display = gridOpen ? 'none' : '';
+        captionEl.style.display = gridOpen ? 'none' : '';
+        viewerTop.querySelector('.viewer__nav').style.display = gridOpen ? 'none' : '';
+      }
+
+      document.getElementById('btn-grid').addEventListener('click', toggleGrid);
+
+      gridView.querySelectorAll('.grid-view__item').forEach(btn => {
         btn.addEventListener('click', () => {
-          const item = btn.parentElement!;
-          const isOpen = item.classList.contains('is-open');
-
-          document.querySelectorAll('.accordion__item.is-open').forEach((el) => {
-            el.classList.remove('is-open');
-            el.querySelector('.accordion__header')?.setAttribute('aria-expanded', 'false');
-          });
-
-          if (!isOpen) {
-            item.classList.add('is-open');
-            btn.setAttribute('aria-expanded', 'true');
-          }
+          goTo(parseInt(btn.dataset.goto));
+          if (gridOpen) toggleGrid();
         });
       });
 
-      // Scroll reveal
-      const reveals = document.querySelectorAll('.section-title, .selected__item, .accordion__item, .bio__text, .bio__image, .footer__links, .footer__tagline');
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-      reveals.forEach((el) => {
-        el.classList.add('reveal');
-        observer.observe(el);
+      // Sidebar nav - Projects toggle
+      document.querySelector('[data-toggle="projects"]').addEventListener('click', () => {
+        document.getElementById('nav-projects').classList.toggle('is-open');
+        const arrow = document.querySelector('[data-toggle="projects"] .nav-arrow');
+        arrow.textContent = document.getElementById('nav-projects').classList.contains('is-open') ? '▾' : '▸';
+      });
+
+      // Sidebar nav - section switching
+      document.querySelectorAll('[data-section]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const section = link.dataset.section;
+          document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('is-active'));
+          link.classList.add('is-active');
+
+          document.getElementById('section-selected').style.display = section === 'selected' ? '' : 'none';
+          document.getElementById('section-bio').style.display = section === 'bio' ? '' : 'none';
+        });
+      });
+
+      // Mobile menu
+      const sidebar = document.getElementById('sidebar');
+      const toggle = document.getElementById('menu-toggle');
+      toggle.addEventListener('click', () => {
+        sidebar.classList.toggle('is-open');
+        toggle.classList.toggle('is-open');
+        document.body.style.overflow = sidebar.classList.contains('is-open') ? 'hidden' : '';
+      });
+
+      sidebar.querySelectorAll('a[data-section], .nav-sub__link').forEach(link => {
+        link.addEventListener('click', () => {
+          sidebar.classList.remove('is-open');
+          toggle.classList.remove('is-open');
+          document.body.style.overflow = '';
+        });
       });
 
       // Lazy image fade-in
       document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
-        if ((img as HTMLImageElement).complete) {
+        if (img.complete) {
           img.classList.add('is-loaded');
         } else {
           img.addEventListener('load', () => img.classList.add('is-loaded'));
@@ -186,288 +280,376 @@ const selectedMoments = [
       });
     </script>
 
-    <style>
+    <style is:global>
       body {
         overflow-x: hidden;
+        margin: 0;
+        background: var(--color-bg);
       }
 
-      /* Hero */
-      .hero {
+      /* Sidebar */
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 32px 28px;
+        z-index: 100;
+        background: var(--color-bg);
+      }
+
+      .sidebar__name {
+        display: flex;
+        flex-direction: column;
+        font-size: 1.375rem;
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: var(--color-text);
+        margin-bottom: 32px;
+      }
+
+      .sidebar__nav {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .nav-link {
+        font-size: 0.8125rem;
+        font-weight: 400;
+        color: var(--color-text-muted);
+        padding: 4px 0;
+        transition: color var(--transition);
+        text-align: left;
+        display: block;
+        width: fit-content;
+      }
+
+      .nav-link:hover,
+      .nav-link.is-active {
+        color: var(--color-text);
+      }
+
+      .nav-link--parent {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .nav-arrow {
+        font-size: 0.625rem;
+      }
+
+      .nav-sub {
+        display: none;
+        flex-direction: column;
+        padding-left: 12px;
+        gap: 1px;
+      }
+
+      .nav-sub.is-open {
+        display: flex;
+      }
+
+      .nav-sub__link {
+        font-size: 0.75rem;
+        color: var(--color-text-muted);
+        padding: 3px 0;
+        transition: color var(--transition);
+      }
+
+      .nav-sub__link:hover {
+        color: var(--color-text);
+      }
+
+      .sidebar__bottom {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .sidebar__social {
+        display: flex;
+        gap: 12px;
+      }
+
+      .sidebar__social a {
+        color: var(--color-text-muted);
+        transition: color var(--transition);
+      }
+
+      .sidebar__social a:hover {
+        color: var(--color-text);
+      }
+
+      .sidebar__copy {
+        font-size: 0.6875rem;
+        color: var(--color-text-muted);
+        letter-spacing: 0.02em;
+      }
+
+      /* Mobile header */
+      .mobile-header {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 110;
+        padding: 16px 20px;
+        background: var(--color-bg);
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .mobile-header__name {
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--color-text);
+      }
+
+      .mobile-header__toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 4px;
+      }
+
+      .mobile-header__toggle span {
+        display: block;
+        width: 22px;
+        height: 1.5px;
+        background: var(--color-text);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .mobile-header__toggle.is-open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      .mobile-header__toggle.is-open span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .mobile-header__toggle.is-open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      /* Main */
+      .main {
+        margin-left: 200px;
         min-height: 100vh;
+      }
+
+      /* Viewer */
+      .viewer {
+        padding: 32px 40px 40px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .viewer__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+      }
+
+      .viewer__nav {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .viewer__btn {
+        font-size: 0.8125rem;
+        font-weight: 400;
+        color: var(--color-text-muted);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color var(--transition);
+        padding: 0;
+      }
+
+      .viewer__btn:hover {
+        color: var(--color-text);
+      }
+
+      .viewer__sep {
+        font-size: 0.8125rem;
+        color: var(--color-text-muted);
+      }
+
+      .viewer__count {
+        font-size: 0.8125rem;
+        color: var(--color-text-muted);
+        margin-left: 8px;
+      }
+
+      .viewer__grid-toggle {
+        color: var(--color-text-muted);
+        transition: color var(--transition);
+        padding: 4px;
+      }
+
+      .viewer__grid-toggle:hover {
+        color: var(--color-text);
+      }
+
+      .viewer__stage {
+        flex: 1;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: var(--spacing-lg);
       }
 
-      .hero__name {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: clamp(3.5rem, 12vw, 10rem);
-        font-weight: 400;
-        letter-spacing: -0.02em;
-        line-height: 0.95;
-        text-transform: uppercase;
+      .viewer__slide {
+        display: none;
+        width: 100%;
+        max-width: 900px;
       }
 
-      .hero__name span {
+      .viewer__slide.is-active {
         display: block;
       }
 
-      /* Section titles */
-      .section-title {
-        font-size: 0.75rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        color: var(--color-text-muted);
-        margin-bottom: var(--spacing-xl);
-        padding: 0 var(--spacing-lg);
-      }
-
-      /* Selected Moments */
-      .selected {
-        padding: var(--spacing-2xl) 0;
-      }
-
-      .selected__grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: var(--spacing-lg);
-        padding: 0 var(--spacing-lg);
-      }
-
-      @media (min-width: 640px) {
-        .selected__grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      @media (min-width: 1024px) {
-        .selected__grid {
-          grid-template-columns: repeat(3, 1fr);
-          gap: var(--spacing-xl);
-        }
-      }
-
-      .selected__item {
-        overflow: hidden;
-      }
-
-      .selected__item a {
-        display: block;
-        overflow: hidden;
-      }
-
-      .selected__item :global(img) {
+      .viewer__slide img {
         width: 100%;
         height: auto;
-        aspect-ratio: 3 / 2;
-        object-fit: cover;
-        transition: transform 0.6s ease;
+        max-height: 75vh;
+        object-fit: contain;
       }
 
-      .selected__item:hover :global(img) {
-        transform: scale(1.03);
-      }
-
-      .selected__item figcaption {
-        margin-top: 0.75rem;
+      .viewer__caption {
+        margin-top: 20px;
         font-size: 0.8125rem;
         color: var(--color-text-muted);
         letter-spacing: 0.02em;
       }
 
-      /* Projects accordion */
-      .projects {
-        padding: var(--spacing-2xl) 0;
-        border-top: 1px solid var(--color-border);
+      /* Grid view */
+      .grid-view {
+        display: none;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        padding: 0;
       }
 
-      .accordion {
-        padding: 0 var(--spacing-lg);
-      }
-
-      .accordion__item {
-        border-bottom: 1px solid var(--color-border);
-      }
-
-      .accordion__header {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        padding: var(--spacing-lg) 0;
-        text-align: left;
-        gap: var(--spacing-md);
-      }
-
-      .accordion__title {
-        font-size: clamp(1.25rem, 3vw, 2rem);
-        font-weight: 500;
+      .grid-view.is-open {
+        display: grid;
         flex: 1;
       }
 
-      .accordion__meta {
-        font-size: 0.8125rem;
-        color: var(--color-text-muted);
-        letter-spacing: 0.02em;
-        display: none;
-      }
-
-      @media (min-width: 640px) {
-        .accordion__meta {
-          display: block;
-        }
-      }
-
-      .accordion__icon {
-        flex-shrink: 0;
-        transition: transform 0.3s ease;
-      }
-
-      .accordion__icon-v {
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        transform-origin: center;
-      }
-
-      .accordion__item.is-open .accordion__icon-v {
-        opacity: 0;
-        transform: rotate(90deg);
-      }
-
-      .accordion__body {
-        max-height: 0;
+      .grid-view__item {
+        aspect-ratio: 3 / 2;
         overflow: hidden;
-        transition: max-height 0.4s ease, padding 0.4s ease;
-        padding: 0 0;
+        padding: 0;
+        background: var(--color-bg-raised);
       }
 
-      .accordion__item.is-open .accordion__body {
-        max-height: 300px;
-        padding: 0 0 var(--spacing-lg);
+      .grid-view__item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
       }
 
-      .accordion__desc {
-        font-size: 0.9375rem;
-        line-height: 1.7;
-        color: var(--color-text-muted);
-        max-width: 600px;
-        margin-bottom: var(--spacing-md);
+      .grid-view__item:hover img {
+        transform: scale(1.03);
       }
 
-      .accordion__link {
-        font-size: 0.8125rem;
-        font-weight: 500;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        color: var(--color-text);
-        transition: opacity var(--transition);
+      /* Bio section */
+      .bio-section {
+        padding: 32px 40px 80px;
+        min-height: 100vh;
       }
 
-      .accordion__link:hover {
-        opacity: 0.6;
-      }
-
-      /* Bio */
-      .bio {
-        padding: var(--spacing-2xl) 0;
-        border-top: 1px solid var(--color-border);
-      }
-
-      .bio__content {
+      .bio-section__content {
         display: flex;
         flex-direction: column;
-        gap: var(--spacing-xl);
-        padding: 0 var(--spacing-lg);
+        gap: 40px;
+        max-width: 800px;
       }
 
-      @media (min-width: 768px) {
-        .bio__content {
+      @media (min-width: 900px) {
+        .bio-section__content {
           flex-direction: row;
           align-items: flex-start;
         }
       }
 
-      .bio__text {
+      .bio-section__text {
         flex: 1;
       }
 
-      .bio__text p {
-        font-size: 1rem;
+      .bio-section__text p {
+        font-size: 0.9375rem;
         line-height: 1.8;
         color: var(--color-text-muted);
-        margin-bottom: var(--spacing-md);
+        margin-bottom: 1rem;
       }
 
-      .bio__text p:last-child {
+      .bio-section__text p:last-child {
         margin-bottom: 0;
       }
 
-      .bio__image {
+      .bio-section__image {
         flex-shrink: 0;
+        width: 280px;
       }
 
-      @media (min-width: 768px) {
-        .bio__image {
-          width: 35%;
-        }
-      }
-
-      .bio__image :global(img) {
+      .bio-section__image img {
         width: 100%;
         height: auto;
       }
 
-      /* Footer */
-      .footer {
-        padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-xl);
-        border-top: 1px solid var(--color-border);
-        text-align: center;
-      }
+      /* Mobile responsive */
+      @media (max-width: 768px) {
+        .sidebar {
+          transform: translateX(-100%);
+          transition: transform 0.35s ease;
+          width: 260px;
+          padding-top: 72px;
+        }
 
-      .footer__links {
-        display: flex;
-        justify-content: center;
-        gap: var(--spacing-xl);
-        margin-bottom: var(--spacing-lg);
-      }
+        .sidebar.is-open {
+          transform: translateX(0);
+        }
 
-      .footer__links a {
-        font-size: 0.8125rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--color-text);
-        transition: opacity var(--transition);
-      }
+        .mobile-header {
+          display: flex;
+        }
 
-      .footer__links a:hover {
-        opacity: 0.6;
-      }
+        .main {
+          margin-left: 0;
+          padding-top: 56px;
+        }
 
-      .footer__tagline {
-        font-size: 0.9375rem;
-        line-height: 1.7;
-        color: var(--color-text-muted);
-        max-width: 500px;
-        margin: 0 auto var(--spacing-xl);
-        font-style: italic;
-      }
+        .viewer {
+          padding: 20px 16px 32px;
+        }
 
-      .footer__copy {
-        font-size: 0.6875rem;
-        color: var(--color-text-muted);
-        letter-spacing: 0.05em;
-      }
+        .viewer__slide img {
+          max-height: 60vh;
+        }
 
-      /* Reveal animation stagger for grid items */
-      .selected__item.reveal {
-        transition-delay: calc(var(--i, 0) * 0.1s);
-      }
+        .grid-view {
+          grid-template-columns: repeat(2, 1fr);
+        }
 
-      .accordion__item.reveal {
-        transition-delay: calc(var(--i, 0) * 0.08s);
+        .bio-section {
+          padding: 20px 16px 60px;
+        }
+
+        .bio-section__image {
+          width: 100%;
+        }
       }
     </style>
   </body>
