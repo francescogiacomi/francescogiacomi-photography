@@ -227,8 +227,10 @@ photos:
     layout: full
 ---
 
-Three countries, one road through the spine of South America. From the rainbow mountains of Vinicunca to the surreal stillness of the Salar de Uyuni, and then south into the Atacama — where the desert becomes the clearest planetarium on Earth.
+Three countries, one road through the spine of South America. From the rainbow mountains of Vinicunca to the surreal white of the Salar de Uyuni, and then south into the Atacama — where the desert becomes the clearest planetarium on Earth.
 
-Three weeks of altitude, dust, and silence. Markets at 4,000 metres, overnight buses across salt flats, sunrises that painted entire mountain ranges in colours I didn't know existed. The people we met carried warmth in the coldest places — sharing food, directions, and stories without a common language.
+This is a journey told in colour. The striped earth of the highlands, the deep blue of altitude skies, the burnt reds and ochres of the desert, the woven textiles that turn every market into a riot of pigment. Even the cold had its own palette — silver salt flats at dawn, lagoons the colour of rust and turquoise.
 
-This project is a record of that crossing: the landscapes that made us feel small, and the faces that made us feel welcome.
+But what stayed with me most were the faces. Women in bowler hats wrapped in layers of bright wool, children playing in dusty plazas, vendors pouring coffee against a backdrop of painted mountains. People who carried warmth in the coldest, highest places — sharing food, directions, and stories without a common language.
+
+This project is a record of that crossing: the colours that made the land feel alive, and the faces that made it feel like home.
