@@ -345,7 +345,6 @@ function resolveImage(src: string): ImageMetadata {
   }
 
   .grid-view__item {
-    aspect-ratio: 3 / 2;
     overflow: hidden;
     padding: 0;
     background: var(--color-bg-raised);
@@ -353,8 +352,8 @@ function resolveImage(src: string): ImageMetadata {
 
   .grid-view__item :global(img) {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
     transition: transform 0.4s ease;
   }
 
