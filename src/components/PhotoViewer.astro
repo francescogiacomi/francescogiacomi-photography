@@ -327,14 +327,13 @@ function resolveImage(src: string): ImageMetadata {
   /* Grid view */
   .grid-view {
     display: none;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    columns: 2;
+    column-gap: 8px;
   }
 
   .grid-view.is-open {
-    display: grid;
+    display: block;
     flex: 1;
-    align-content: start;
   }
 
   /* When grid is open, hide the single-photo body + caption */
@@ -347,6 +346,8 @@ function resolveImage(src: string): ImageMetadata {
   .grid-view__item {
     overflow: hidden;
     padding: 0;
+    margin-bottom: 8px;
+    break-inside: avoid;
   }
 
   .grid-view__item :global(img) {
