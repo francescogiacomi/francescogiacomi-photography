@@ -347,17 +347,15 @@ function resolveImage(src: string): ImageMetadata {
   .grid-view__item {
     overflow: hidden;
     padding: 0;
-    background: var(--color-bg-raised);
   }
 
   .grid-view__item :global(img) {
     width: 100%;
     height: auto;
-    object-fit: contain;
-    transition: transform 0.4s ease;
+    display: block;
   }
 
-  .grid-view__item:hover :global(img) { transform: scale(1.03); }
+  .grid-view__item:hover :global(img) { }
 
   /* Mobile feed */
   .mobile-feed { display: none; }
