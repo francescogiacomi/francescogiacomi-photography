@@ -41,7 +41,7 @@ const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
         <nav class="sidebar__nav">
           <a href="/" class={`nav-link ${activeNav === 'selected' ? 'is-active' : ''}`}>Selected Moments</a>
           <div class="nav-group">
-            <span class="nav-label">Projects</span>
+            <span class="nav-label">Journeys</span>
             <div class="nav-sub">
               <span class="nav-sub__link is-coming">Vietnam (2026) — Coming</span>
               {sorted.map((entry) => (
@@ -52,7 +52,7 @@ const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
               ))}
             </div>
           </div>
-          <a href="/about" class={`nav-link ${activeNav === 'bio' ? 'is-active' : ''}`}>Bio</a>
+          <a href="/about" class={`nav-link nav-link--statement ${activeNav === 'bio' ? 'is-active' : ''}`}>Statement</a>
         </nav>
       </div>
       <div class="sidebar__bottom">
@@ -89,7 +89,7 @@ const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
         <nav class="mobile-menu__nav">
           <a href="/" class={`mobile-menu__link ${activeNav === 'selected' ? 'is-active' : ''}`}>Selected Moments</a>
           <div class="mobile-menu__group">
-            <span class="mobile-menu__label">Projects</span>
+            <span class="mobile-menu__label">Journeys</span>
             <span class="mobile-menu__sub is-coming">Vietnam (2026) — Coming</span>
             {sorted.map((entry) => (
               <a
@@ -98,7 +98,7 @@ const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
               >{entry.data.title} ({entry.data.year})</a>
             ))}
           </div>
-          <a href="/about" class={`mobile-menu__link ${activeNav === 'bio' ? 'is-active' : ''}`}>Bio</a>
+          <a href="/about" class={`mobile-menu__link mobile-menu__link--statement ${activeNav === 'bio' ? 'is-active' : ''}`}>Statement</a>
         </nav>
         <div class="mobile-menu__bottom">
           <div class="mobile-menu__social">
@@ -220,6 +220,10 @@ const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
         font-style: italic;
       }
       .nav-sub__link.is-coming:hover { color: var(--color-text-muted); }
+
+      .nav-link--statement {
+        margin-top: 32px;
+      }
 
       .sidebar__bottom {
         display: flex;
@@ -359,6 +363,10 @@ const sorted = allCollections.sort((a, b) => a.data.order - b.data.order);
       .mobile-menu__sub.is-coming {
         opacity: 0.5;
         font-style: italic;
+      }
+
+      .mobile-menu__link--statement {
+        margin-top: 32px;
       }
 
       .mobile-menu__bottom {
